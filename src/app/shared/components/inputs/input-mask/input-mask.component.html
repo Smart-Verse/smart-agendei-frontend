@@ -1,0 +1,15 @@
+
+<p-floatLabel>
+  <p-inputMask
+    [pTooltip]="guidance"
+    (ngModelChange)="onChange($event)"
+    [ngModel]="value"
+    [ngClass]="{'ng-invalid ng-dirty': !isValid}"
+    class="w-full outlined"
+
+    [autofocus]="focus"
+    [disabled]="disabled"
+    [mask]="mask"/>
+  <label>{{label}}</label>
+</p-floatLabel>
+

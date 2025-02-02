@@ -1,0 +1,92 @@
+.login{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    .login-container{
+        width: 30%;
+        padding: 16px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .image-logo{
+            height: 80px;
+            max-height: 80px;
+            background-image: url("./../../../assets/logo/smartverse-10024.png");
+            background-size: cover;
+            background-position: center;
+        }
+    }
+    .login-area{
+        width: 70%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #B993D6;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #8CA6DB, #B993D6);
+        background: linear-gradient(to right, #8CA6DB, #B993D6);
+        
+        .image-area{
+            height: 100%;
+            width: 100%;
+            background-image: url("./../../../assets/logo/smartverse-10024.png");
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    }
+}
+.text{
+    font-size: 20px;
+    font-weight: bold;
+}
+.text-sign{
+    margin-top: 60px;
+    text-align: center;
+}
+
+a{
+    color: blue;
+    cursor: pointer;
+}
+
+.btn-tx{
+    text-align: center;
+    width: 100%;
+}
+
+@media (max-width: 600px){
+    .login{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .login-container{
+            padding: 10px;
+            width: 90%;
+            .image-logo{
+                height: 80px;
+                max-height: 80px;
+                background-image: url("./../../../assets/logo/smartverse-10024.png");
+                background-size: cover;
+                background-position: center;
+            }
+        }
+        .login-area{
+            background-color: black;
+            width: 0%;
+            height: 100%;
+        }
+        
+    }
+}
+
+:host::ng-deep {
+    .p-inputtext{
+      background-color: rgba($color: #e9e6e6, $alpha: 0.1);
+      border: none;
+    }
+    .p-button{
+      color: rgb(20, 13, 13);
+    }
+  }

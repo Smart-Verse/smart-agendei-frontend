@@ -1,0 +1,29 @@
+:host::ng-deep {
+    .p-button{
+        background: var(--active-indicator-color);
+        color: black;
+        padding: 0.55rem 1rem;
+    }
+    .p-button.p-button-icon-only {
+        width: 2rem;
+        padding: 0.45rem;
+    }
+    .p-datatable .p-datatable-tbody > tr > td {
+        text-align: left;
+        border: none;
+        border-width: 0 0 1px 0;
+        font-size: 12px;
+        padding: 0.35rem 0.90rem;
+    }
+    .p-datatable .p-datatable-thead > tr > th {
+      font-size: 12px;
+    }
+    .p-treetable .p-treetable-tbody > tr > td {
+      text-align: left;
+      border: none;
+      border-width: 0 0 1px 0;
+      font-size: 12px;
+      padding: 0.35rem 0.90rem;
+    }
+
+}

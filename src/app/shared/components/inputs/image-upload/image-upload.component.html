@@ -1,0 +1,23 @@
+<div>
+  <div class="container-image">
+    <div (click)="onFileInput()" class="image-container" *ngIf="!imageUrl">Selecione uma imagen</div>
+    <img class="image-container" *ngIf="imageUrl" [src]="imageUrl">
+  </div>
+  <input type="file" (change)="onImageSelect($event)" accept="image/*" id="fileInput" class="file-input" />
+  <div class="btn">
+    <button
+      (click)="onFileInput()"
+      type="button"
+      pButton
+      pRipple
+      icon="pi pi-upload">
+    </button>
+    <button
+      (click)="onDeleteImage()"
+      type="button"
+      pButton
+      pRipple
+      icon="pi pi-trash">
+    </button>
+  </div>
+</div>

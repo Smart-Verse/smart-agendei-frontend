@@ -1,0 +1,39 @@
+<app-loading [showLoading]="showLoading"></app-loading>
+<div class="login">
+    <div class="login-container">
+        <div class="formgrid grid">
+            <div class="field col-12 md:col-12 image-logo">
+            </div>
+            <div class="field col-12 md:col-12 c-margin">
+                <p class="text">Login na sua conta</p>
+            </div>
+            <form class="field col-12 md:col-12" [formGroup]="loginForm">
+                <div class="field col-12 md:col-12 c-margin">
+                    <p-floatLabel >
+                        <input pInputText id="email" formControlName="email" class="w-full" />
+                        <label for="email">Email</label>
+                    </p-floatLabel>
+                </div>
+                <div class="field col-12 md:col-12 c-margin">
+                    <p-floatLabel>
+                        <input pInputText type="password" id="password" formControlName="password" class="w-full" />
+                        <label for="password">Senha</label>
+                    </p-floatLabel>
+                </div>
+              <div class="outline field col-12 md:col-12">
+                <p-button (onClick)="onLogin()" label="Login" [rounded]="true"  severity="primary" styleClass="w-full" />
+              </div>
+              <div class="outline field col-12 md:col-12">
+                <p-button label="Recupere a senha" [rounded]="true" variant="outlined" severity="success" styleClass="w-full" />
+              </div>
+            </form>
+
+            <div class="w-full">
+                <div class="text-sign">Não possui conta? <a (click)="onSignUp()">Cadastre-se</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="login-area">
+        <div class="image-area"></div>
+    </div>
+</div>

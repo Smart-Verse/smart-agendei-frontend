@@ -1,0 +1,34 @@
+<div class="toolbar" *ngIf="showSidebarMobile" (click)="onMobileOpenMenu()">
+  <h3>SmartChurch</h3>
+</div>
+<div class="sidebar" *ngIf="showSidebar" [class.expanded]="isExpanded">
+    <ul class="menu-list">
+      <div class="logo">
+          <h3>S</h3>
+      </div>
+      <div class="menu-expanded">
+        <div class="menu-expanded-icon">
+          <li *ngFor="let item of menuItems;" (click)="toggleMenu(item)"
+            [routerLink]="item.route"
+            [id]="item.name">
+            <span class="indicator"></span>
+            <i [ngClass]="item.iconClass" pTooltip="{{ item.tooltip }}"></i>
+          </li>
+        </div>
+        <div *ngIf="isExpanded" class="menu-expanded-submenu">
+          <app-sidebar-submenu (colapsed)="closeMenu()" [menu]="currentMenu"></app-sidebar-submenu>
+        </div>
+      </div>
+      <div class="logout">
+        <li class="logout-item">
+          <div class="footer" >
+            <div *ngIf="!image" class="user">User</div>
+            <img *ngIf="image" class="user" [src]="image">
+          </div>
+        </li>
+      </div>
+    </ul>
+</div>
+<div class="content" [class.menu-expanded]="isExpanded" (click)="closeMenu()">
+    <router-outlet></router-outlet>
+</div>

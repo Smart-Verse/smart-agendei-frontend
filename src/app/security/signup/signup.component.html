@@ -1,0 +1,47 @@
+<app-loading [showLoading]="showLoading"></app-loading>
+<div class="signup">
+    <div class="signup-container">
+        <div class="formgrid grid">
+            <div class="field col-12 md:col-12 image-logo">
+            </div>
+            <div class="field col-12 md:col-12">
+                <p class="text">Cadastre-se</p>
+            </div>
+            <form class="field col-12 md:col-12" action="" [formGroup]="signUp">
+                <div class="field">
+                    <p-floatLabel>
+                        <input pInputText id="name" class="w-full"  formControlName="name"/>
+                        <label for="name">Nome</label>
+                    </p-floatLabel>
+                </div>
+                <div class="field c-margin">
+                    <p-floatLabel >
+                        <input pInputText id="email" class="w-full" formControlName="email"/>
+                        <label for="email">Email</label>
+                    </p-floatLabel>
+                </div>
+                <div class="field c-margin">
+                    <p-floatLabel >
+                        <input type="password" pInputText id="password" class="w-full" formControlName="password"/>
+                        <label for="password">Senha</label>
+                    </p-floatLabel>
+                </div>
+                <div class="field c-margin">
+                    <p-floatLabel >
+                        <input type="password" pInputText id="confirmPassword" class="w-full" formControlName="confirmPassword"/>
+                        <label for="confirmPassword">Confirmação de senha</label>
+                    </p-floatLabel>
+                </div>
+            </form>
+            <div class="outline field col-12 md:col-12 ">
+              <p-button (onClick)="onRegister()" label="Criar conta" [rounded]="true"  severity="primary" styleClass="w-full" />
+            </div>
+            <div class="w-full c-margin">
+                <div class="text-sign">Ja possui conta? <a (click)="onSign()">Entre</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="signup-area">
+        <div class="image-area"></div>
+    </div>
+</div>

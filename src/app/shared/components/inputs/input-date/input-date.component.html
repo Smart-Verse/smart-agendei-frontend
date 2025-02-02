@@ -1,0 +1,18 @@
+<p-floatLabel>
+  <p-calendar
+    (ngModelChange)="onChange($event)"
+    [ngModel]="value"
+    [iconDisplay]="'input'"
+    [showIcon]="true"
+    [ngClass]="{'ng-invalid ng-dirty': !isValid}"
+    appendTo="body"
+
+    [autofocus]="focus"
+    [disabled]="disabled"
+    [touchUI]="false"
+    [locale]="ptBr"
+    dateFormat="dd/mm/yy"
+    [readonlyInput]="false"
+    class="w-full"/>
+  <label>{{label}}</label>
+</p-floatLabel>

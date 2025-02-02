@@ -1,0 +1,21 @@
+<div class="sidebar">
+  <div class="sidebar-internal">
+    <div class="side-header">
+      <i class="pi pi-asterisk"></i>
+    </div>
+    <div class="side-body">
+      <div class="body-item side-center" *ngFor="let item of _menuitens">
+          <i [class]="item.iconClass"></i>
+          <div class="side-text">{{item.name}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="cnt-header">
+    Ola
+  </div>
+  <div class="cnt-body">
+    <router-outlet></router-outlet>
+  </div>
+</div>
