@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "dataon-web-utils": {
+    "agendei": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,8 +17,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/dataon-web-utils",
+            "outputPath": "dist/agendei",
             "index": "src/index.html",
+            "deployUrl": "/agendei/",
+            "baseHref": "/agendei/",
             "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
@@ -73,10 +75,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "dataon-web-utils:build:production"
+              "buildTarget": "agendei:build:production"
             },
             "development": {
-              "buildTarget": "dataon-web-utils:build:development"
+              "buildTarget": "agendei:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +86,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "dataon-web-utils:build"
+            "buildTarget": "agendei:build"
           }
         },
         "test": {

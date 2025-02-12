@@ -1,0 +1,37 @@
+[
+  {
+    "route": "dashboard",
+    "iconClass": "pi pi-bell",
+    "tooltip": "Dashboard",
+    "name": "Dashboard",
+    "submenu": []
+  },
+  {
+    "route": "services",
+    "iconClass": "pi pi-bell",
+    "tooltip": "Serviços",
+    "name": "Serviços",
+    "submenu": []
+  },
+  {
+    "route": "person",
+    "iconClass": "pi pi-bell",
+    "tooltip": "Clientes",
+    "name": "Clientes",
+    "submenu": []
+  },
+  {
+    "route": "scheduler",
+    "iconClass": "pi pi-bell",
+    "tooltip": "Agenda",
+    "name": "Agenda",
+    "submenu": []
+  },
+  {
+    "route": "configuration",
+    "iconClass": "pi pi-bell",
+    "tooltip": "Configurações",
+    "name": "Configurações",
+    "submenu": []
+  }
+]

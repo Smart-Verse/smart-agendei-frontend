@@ -5,6 +5,10 @@ import {SignupComponent} from "./security/signup/signup.component";
 import {HomeComponent} from "./pages/home/home.component";
 import {privateGuard} from "./security/guards/private.guard";
 import {DashboardComponent} from "./pages/dashboard/dashboard.component";
+import {ServicesComponent} from "./pages/services/services.component";
+import {PersonComponent} from "./pages/person/person.component";
+import {SchedulerComponent} from "./pages/scheduler/scheduler.component";
+import {ConfigurationComponent} from "./pages/configuration/configuration.component";
 
 export const routes: Routes = [
 
@@ -16,6 +20,10 @@ export const routes: Routes = [
     canActivate: [privateGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
+      { path: 'services', component: ServicesComponent },
+      { path: 'person', component: PersonComponent },
+      { path: 'scheduler', component: SchedulerComponent },
+      { path: 'configuration', component: ConfigurationComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ]
   },

@@ -1,5 +1,5 @@
 
-  $sidebar-width: 80px;
+  $sidebar-width: 100px;
   $sidebar-expanded: 300px;
   $custom-primary-color: #333;
   $content-bg-color: #f4f4f4;
@@ -45,7 +45,8 @@
       flex-direction: column;
       .body-item{
         height: 60px;
-        width: 100%;
+        width: 75%;
+        font-weight: bold;
         margin: 5px;
         cursor: pointer;
         border-radius: 15px;
