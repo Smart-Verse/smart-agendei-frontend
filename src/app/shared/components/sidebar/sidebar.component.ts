@@ -1,6 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import { SharedCommonModule } from '../../common/shared-common.module';
-import { RouterLink, RouterOutlet} from '@angular/router';
+import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import { TooltipModule } from 'primeng/tooltip';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
@@ -18,16 +18,16 @@ import {MenuItens} from "./config/menu-itens";
 
 @Component({
     selector: 'app-sidebar',
-    imports: [
-        SharedCommonModule,
-        RouterLink,
-        TooltipModule,
-        AvatarModule,
-        AvatarGroupModule,
-        RouterOutlet,
-        SidebarSubmenuComponent,
-        MenuModule
-    ],
+  imports: [
+    SharedCommonModule,
+    RouterLink,
+    TooltipModule,
+    AvatarModule,
+    AvatarGroupModule,
+    RouterOutlet,
+    SidebarSubmenuComponent,
+    MenuModule
+  ],
     providers: [
         ImageUploadService
     ],

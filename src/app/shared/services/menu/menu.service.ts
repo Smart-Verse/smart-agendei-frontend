@@ -9,9 +9,9 @@ import {HttpClient} from "@angular/common/http";
 })
 export class MenuService {
 
-  private menu: { [p: string]: string; } | undefined;
+  public menu: any[] = [];
 
-  constructor(private readonly http: HttpClient,) { }
+  constructor(private readonly http: HttpClient) { }
 
   loadMenu(): Observable<void> {
     let urlProduction = "";
@@ -19,7 +19,7 @@ export class MenuService {
       urlProduction = "/agendei"
     }
     return this.http.get<{ [key: string]: string }>(`${urlProduction}/assets/configuration/menu.json`).pipe(
-      map((data) => {
+      map((data: any) => {
         this.menu = data;
       })
     );

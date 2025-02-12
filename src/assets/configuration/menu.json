@@ -1,35 +1,35 @@
 [
   {
     "route": "dashboard",
-    "iconClass": "pi pi-bell",
+    "iconClass": "pi pi-chart-bar",
     "tooltip": "Dashboard",
     "name": "Dashboard",
     "submenu": []
   },
   {
+    "route": "scheduler",
+    "iconClass": "pi pi-calendar-times",
+    "tooltip": "Agenda",
+    "name": "Agenda",
+    "submenu": []
+  },
+  {
     "route": "services",
-    "iconClass": "pi pi-bell",
+    "iconClass": "pi pi-briefcase",
     "tooltip": "Serviços",
     "name": "Serviços",
     "submenu": []
   },
   {
     "route": "person",
-    "iconClass": "pi pi-bell",
+    "iconClass": "pi pi-users",
     "tooltip": "Clientes",
     "name": "Clientes",
     "submenu": []
   },
   {
-    "route": "scheduler",
-    "iconClass": "pi pi-bell",
-    "tooltip": "Agenda",
-    "name": "Agenda",
-    "submenu": []
-  },
-  {
     "route": "configuration",
-    "iconClass": "pi pi-bell",
+    "iconClass": "pi pi-cog",
     "tooltip": "Configurações",
     "name": "Configurações",
     "submenu": []

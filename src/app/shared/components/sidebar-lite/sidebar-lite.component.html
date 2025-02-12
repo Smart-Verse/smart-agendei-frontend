@@ -4,16 +4,21 @@
       <i class="pi pi-asterisk"></i>
     </div>
     <div class="side-body">
-      <div class="body-item side-center" *ngFor="let item of _menuitens">
+      <div
+        class="body-item side-center" *ngFor="let item of _menuitens"
+         [routerLink]="item.route"
+         routerLinkActive="active">
           <i [class]="item.iconClass"></i>
-          <div class="side-text">{{item.name}}</div>
+          <div pTooltip="{{ item.tooltip }}" class="side-text">{{item.name}}</div>
       </div>
     </div>
   </div>
 </div>
 <div class="content">
   <div class="cnt-header">
-    Ola
+    <div>
+      <span class="greeting-user">Bem vindo de volta </span><span class="user-name">Helena!</span>
+    </div>
   </div>
   <div class="cnt-body">
     <router-outlet></router-outlet>
