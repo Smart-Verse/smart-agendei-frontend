@@ -3,14 +3,11 @@
   $sidebar-expanded: 300px;
   $custom-primary-color: #333;
   $content-bg-color: #f4f4f4;
-  $active-indicator-color: linear-gradient(to right, #8CA6DB, #B993D6);
-
 
 .sidebar{
   position: fixed;
   z-index: 1000;
-  left: 0;
-  top: 0;
+
   width: $sidebar-width;
   height: 100vh;
   display: flex;
@@ -94,4 +91,31 @@
 .active{
   background: #E7F0FF;
   color: #428BFE;
+}
+
+@media (max-width: 600px){
+
+  .sidebar{
+    width: 100%;
+    height: 70px;
+    bottom: 0;
+    .sidebar-internal{
+      flex-direction: row;
+      .side-header{
+        display: none;
+      }
+      .side-body{
+        flex-direction: row;
+      }
+    }
+  }
+  .content{
+    height: 100%;
+    width: 100vw;
+    margin-left: 0;
+  }
+
+  .content.menu-expanded {
+    margin-left: 0px;
+  }
 }
