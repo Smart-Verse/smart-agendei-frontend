@@ -1,1 +1,8 @@
-Servicos
+<div class="services">
+  <app-datatable
+    (onRefresh)="onLoadAllData($event)"
+    (onRegister)="onSelectedData($event)"
+    [config]="datatableConfig">
+  </app-datatable>
+
+</div>

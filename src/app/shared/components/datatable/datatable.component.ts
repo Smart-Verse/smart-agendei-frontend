@@ -4,7 +4,6 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule  } from 'primeng/table';
 import { DataTable } from './datatable';
 import { SidebarModule } from 'primeng/sidebar';
-import {RequestData} from "../../interfaces/request-data";
 import {Ripple} from "primeng/ripple";
 import {IconFieldModule} from "primeng/iconfield";
 import {InputIconModule} from "primeng/inputicon";
@@ -13,6 +12,7 @@ import {PaginatorModule, PaginatorState} from 'primeng/paginator';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { TranslateService } from '../../services/translate/translate.service';
+import {RequestData} from "../request-data";
 
 
 export enum Action {

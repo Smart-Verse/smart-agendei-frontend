@@ -7,7 +7,6 @@
 .sidebar{
   position: fixed;
   z-index: 1000;
-
   width: $sidebar-width;
   height: 100vh;
   display: flex;
@@ -45,7 +44,7 @@
   }
 }
 .content{
-  width: calc($sidebar-width + 100%);
+  width: calc(100% - $sidebar-width);
   margin-left: $sidebar-width;
   padding: 20px;
   height: 100%;
@@ -66,6 +65,7 @@
   }
   .cnt-body{
     height: calc(100% - 100px);
+    width: 100%;
   }
 }
 

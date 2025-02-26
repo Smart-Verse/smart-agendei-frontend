@@ -9,10 +9,20 @@ import {providePrimeNG} from "primeng/config";
 import { SmartVerseTheme } from "./shared/styles/smartverse-theme";
 import {SmartVerseAgendeiTheme} from "./shared/styles/smart-agendei-theme";
 import {MenuService} from "./shared/services/menu/menu.service";
+import {ConfigTableService} from "./shared/services/configtable/config-table.service";
+import {TranslateService} from "./shared/services/translate/translate.service";
 
 
 export function loadMenu(menuService: MenuService) {
   return () => menuService.loadMenu().pipe();
+}
+
+export function loadConfigTable(loadConfigTable: ConfigTableService) {
+  return () => loadConfigTable.loadModelRegister().pipe();
+}
+
+export function loadTranslationsFactory(translationService: TranslateService) {
+  return () => translationService.loadTranslations().pipe();
 }
 
 export const appConfig: ApplicationConfig = {
@@ -25,6 +35,18 @@ export const appConfig: ApplicationConfig = {
       provide: APP_INITIALIZER,
       useFactory: loadMenu,
       deps: [MenuService],
+      multi: true
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: loadConfigTable,
+      deps: [ConfigTableService],
+      multi: true
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: loadTranslationsFactory,
+      deps: [TranslateService],
       multi: true
     },
     providePrimeNG({
