@@ -21,7 +21,7 @@
     "submenu": []
   },
   {
-    "route": "person",
+    "route": "register/person",
     "iconClass": "pi pi-users",
     "tooltip": "Clientes",
     "name": "Clientes",

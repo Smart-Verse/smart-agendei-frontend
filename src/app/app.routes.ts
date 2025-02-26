@@ -9,6 +9,7 @@ import {ServicesComponent} from "./pages/services/services.component";
 import {PersonComponent} from "./pages/person/person.component";
 import {SchedulerComponent} from "./pages/scheduler/scheduler.component";
 import {ConfigurationComponent} from "./pages/configuration/configuration.component";
+import {RegisterComponent} from "./pages/register/register.component";
 
 export const routes: Routes = [
 
@@ -20,6 +21,7 @@ export const routes: Routes = [
     canActivate: [privateGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
+      { path: 'register/:hash', component: RegisterComponent },
       { path: 'services', component: ServicesComponent },
       { path: 'person', component: PersonComponent },
       { path: 'scheduler', component: SchedulerComponent },
