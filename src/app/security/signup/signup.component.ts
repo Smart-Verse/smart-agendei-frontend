@@ -8,10 +8,11 @@ import {  Router } from '@angular/router';
 import { SecurityService } from '../services/security.service';
 import { ToastService } from '../../shared/services/toast/toast.service';
 import {LoadingComponent} from "../../shared/loading/loading.component";
+import {InputMask} from "primeng/inputmask";
 
 @Component({
     selector: 'app-signup',
-    imports: [SharedCommonModule, LoadingComponent],
+  imports: [SharedCommonModule, LoadingComponent, InputMask],
     providers: [SecurityService, ToastService],
     templateUrl: './signup.component.html',
     styleUrl: './signup.component.scss'

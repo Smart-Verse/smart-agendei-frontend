@@ -8,6 +8,12 @@ export class SignUp {
             type: 'string'
         },
         {
+          fieldName: 'phone',
+          required: true,
+          hidden: false,
+          type: 'phone'
+        },
+        {
             fieldName: 'email',
             required: true,
             hidden: false,

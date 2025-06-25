@@ -1,6 +1,5 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
-import {SideMenuItens} from "./config/side-menu-itens";
 import {CommonModule} from "@angular/common";
 import {MenuService} from "../../services/menu/menu.service";
 import {Tooltip} from "primeng/tooltip";
