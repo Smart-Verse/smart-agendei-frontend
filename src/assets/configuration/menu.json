@@ -14,14 +14,14 @@
     "submenu": []
   },
   {
-    "route": "services",
+    "route": "register/service",
     "iconClass": "pi pi-briefcase",
     "tooltip": "Serviços",
     "name": "Serviços",
     "submenu": []
   },
   {
-    "route": "register/person",
+    "route": "register/client",
     "iconClass": "pi pi-users",
     "tooltip": "Clientes",
     "name": "Clientes",

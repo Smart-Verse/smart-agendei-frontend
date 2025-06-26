@@ -1,20 +1,24 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Type} from '@angular/core';
 import { SharedCommonModule } from '../../shared/common/shared-common.module';
 import { DataTable } from '../../shared/components/datatable/datatable';
+
 import {ActivatedRoute} from "@angular/router";
 import {CrudService} from "../../shared/services/crud/crud.service";
 import {config, RegisterRoutes} from "./register";
+import {TranslateService} from "../../shared/services/translate/translate.service";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {ToastService} from "../../shared/services/toast/toast.service";
-import {TranslateService} from "../../shared/services/translate/translate.service";
-import {ConfigTableService} from "../../shared/services/configtable/config-table.service";
 import {RequestData} from "../../shared/components/request-data";
+import {LoadingService} from "../../shared/services/loading/loading.service";
+import {DatatableComponent} from "../../shared/components/datatable/datatable.component";
+import {RegisterService} from "../../shared/services/register/register.service";
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [
-    SharedCommonModule
+    SharedCommonModule,
+    DatatableComponent
   ],
   providers: [
     CrudService,
@@ -32,89 +36,121 @@ export class RegisterComponent implements OnInit  {
   routeComponent: string | null = "";
   configuration: RegisterRoutes = new RegisterRoutes();
   originalClose: any;
+  isTreetable: boolean = false;
+  parentObjectName: string = "";
 
   constructor(
-      private readonly activatedRoute: ActivatedRoute,
-      private readonly crudService: CrudService,
-      private readonly dialogService: DialogService,
-      private readonly toastService: ToastService,
-      private readonly translateService: TranslateService,
-      private readonly configTable: ConfigTableService,
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly crudService: CrudService,
+    private readonly registerService: RegisterService,
+    private readonly dialogService: DialogService,
+    private readonly toastService: ToastService,
+    private readonly translateService: TranslateService,
+    private readonly loadingService: LoadingService
   ){}
 
   ngOnInit(): void {
-      this.activatedRoute.paramMap.subscribe(params => {
-        this.routeComponent = params.get('hash');
-        var obj = this.configTable.getModel(this.routeComponent || "");
-        this.onSetPropertiesDatatable(obj);
-      });
+    this.activatedRoute.paramMap.subscribe(params => {
+      this.routeComponent = params.get('hash');
+      var obj = this.registerService.getModel(this.routeComponent || "");
+      this.onSetPropertiesDatatable(obj);
+    });
   }
 
   onSetPropertiesDatatable(obj: any): void  {
     this.configuration = config.filter(e => e.view === obj.hash)[0];
     this.datatable.fields = obj.fields;
+    if(obj.treeTable){
+      this.isTreetable = obj.treeTable;
+      this.parentObjectName = obj.parentObjectName;
+    }
     this.onLoadAllData(new RequestData());
   }
 
   onLoadAllData(requestData: RequestData): void {
+    this.loadingService.showLoading.next(true);
     requestData = this.includeFilters(requestData);
     this.crudService.onGetAll(this.configuration.route,requestData).subscribe({
       next: (res) => {
         this.datatable.values = res.contents;
         this.datatable.totalRecords = res.total;
-        this.datatable.page = res.offset + 1;
+        this.datatable.page = res.offset;
         this.datatable.size = res.size;
+        if(this.isTreetable){
+          // é necessário melhorar isso, ainda é muito sensivel a falhas
+          // mudar a forma urgente
+          this.datatable.treeValues = this.onLoadChildren(res.contents).filter(e => e.data.specificCode.length == 1);
+        }
+        this.loadingService.showLoading.next(false);
       },
       error: (err) => {
+        this.loadingService.showLoading.next(false);
       }
     });
   }
 
-  onLoadData(id: any): void {
+  onLoadData(id: any, obj: any): void {
+    this.loadingService.showLoading.next(true);
     this.crudService.onGet(this.configuration.route,id).subscribe({
       next: (res) => {
+        this.loadingService.showLoading.next(false);
+        //aqui devo colocar o pai, mas será que pro C# precisa?
+        if(this.isTreetable){
+          res.parent = obj.parent;
+          res.action = obj.action;
+        }
         this.onOpenModal(res);
       },
       error: (err) => {
+        this.loadingService.showLoading.next(false);
         this.onToast(0,err.error.message);
       }
     });
   }
 
   onDelete(id: any): void {
+    this.loadingService.showLoading.next(true);
     this.crudService.onDelete(this.configuration.route,id).subscribe({
       next: (res) => {
         this.onLoadAllData(new RequestData());
+        this.loadingService.showLoading.next(false);
         this.onToast(1,"");
       },
       error: (err) => {
+        this.loadingService.showLoading.next(false);
         this.onToast(0,err.error.message);
       }
     });
   }
 
   onSave(param: any): void {
+    this.loadingService.showLoading.next(true);
     this.crudService.onSave(this.configuration.route,param).subscribe({
       next: (res) => {
         this.datatable.values = res.contents;
         this.onLoadAllData(new RequestData());
+        this.loadingService.showLoading.next(false);
         this.originalClose(null);
         this.onToast(1,"");
       },
       error: (err) => {
+        this.loadingService.showLoading.next(false);
         this.onToast(0,err.error.message);
       }
     });
   }
 
   onUpdate(param: any): void {
+    this.loadingService.showLoading.next(true);
     this.crudService.onUpdate(this.configuration.route,param.id,param).subscribe({
       next: (res) => {
         this.onLoadAllData(new RequestData());
+        this.loadingService.showLoading.next(false);
         this.originalClose(null);
         this.onToast(1,"");
       },
-      error: (err) => {0
+      error: (err) => {
+        this.loadingService.showLoading.next(false);
         this.onToast(0,err.error.message);
       }
     });
@@ -125,24 +161,36 @@ export class RegisterComponent implements OnInit  {
       if(obj.action === 0){// delete data
         this.onDelete(obj.data.id);
       } else {
-        this.onLoadData(obj.data.id);
+        if(this.isTreetable && obj.action === 2){
+          this.onOpenModal(obj);
+        } else {
+          // quando edita, tenho que mandar a porra do parent tbm
+          this.onLoadData(obj.data.id, obj);
+        }
+
       }
     } else{
-      this.onOpenModal(obj);
+      this.onOpenModal(null);
     }
   }
 
-  onOpenModal(obj: any){
-    this.ref = this.dialogService.open(this.configuration.component,
+  async onOpenModal(obj: any){
+    let component:Type<any>;
+    if(this.configuration.loadComponent){
+      component = await this.configuration.loadComponent();
+    } else {
+      component = this.configuration.component;
+    }
+    this.ref = this.dialogService.open(component,
       {
         header: this.configuration.header,
         width: '80vw',
         modal:true,
-        draggable: true,
         closable: true,
+        draggable: true,
         maximizable: false,
         data: obj,
-        baseZIndex: 99999,
+        baseZIndex: 999998,
       });
 
 
@@ -172,5 +220,35 @@ export class RegisterComponent implements OnInit  {
     var filter = this.configuration.defaultFilter;
     requestData.filter = filter + requestData.filter;
     return requestData;
+  }
+
+  /**
+   * esse método é super importante, pois é aqui que
+   * é montado a arvore, muito cuidado ao alterar, se não quebra tudo
+   * O parentObjectName deve conter certinho o nome do campo
+   * onde contem os filhos
+   * @param obj
+   */
+  onLoadChildren(obj: any[]): any[] {
+    var tree: any[] = [];
+    if(!obj){
+      return tree;
+    }
+    obj.forEach(item => {
+      var data:{data: any, children: any[]} = {
+        data: item,
+        children: []
+      }
+      if(item[this.parentObjectName] && item[this.parentObjectName].length === 0){
+        data.children = item[this.parentObjectName];
+        tree.push(data);
+      }
+      else {
+        data.children = this.onLoadChildren(item[this.parentObjectName]);
+        tree.push(data);
+      }
+
+    });
+    return tree;
   }
 }

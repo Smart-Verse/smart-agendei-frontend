@@ -19,6 +19,7 @@ export class SidebarSubmenuComponent implements OnInit, OnChanges {
 
   @Input() menu: any;
   @Output() colapsed: EventEmitter<boolean> = new EventEmitter();
+  @Output() menuItemSelected: EventEmitter<any> = new EventEmitter<any>();
 
   currentMenu: any;
   stackMenu: any[] = [];
@@ -53,6 +54,7 @@ export class SidebarSubmenuComponent implements OnInit, OnChanges {
   onContextMenu(contextMenu: any) {
     if(contextMenu.route){
       this.onLogout(contextMenu.route);
+      this.onMenuSelected(contextMenu);
       this.onColapsed(null);
     } else {
       this.stackMenu.push(contextMenu);
@@ -65,5 +67,9 @@ export class SidebarSubmenuComponent implements OnInit, OnChanges {
       this.cookieService.delete(EnumCookie.AUTHORIZATION);
       this.router.navigate(['login']);
     }
+  }
+
+  onMenuSelected(menu: any){
+    this.menuItemSelected.emit(menu);
   }
 }

@@ -1,12 +1,18 @@
 
 
+$sidebar-width: 60px;
+$sidebar-expanded: 300px;
+$custom-primary-color: #333;
+$content-bg-color: #f4f4f4;
+$active-indicator-color: #a78bfa;
+
 /* sidebar.component.css */
 .sidebar {
   position: fixed;
   z-index: 1000;
   left: 0;
   top: 0;
-  width: var(--sidebar-width);
+  width: $sidebar-width;
   height: 100vh;
   background: linear-gradient(to right, #8CA6DB, #B993D6);
   display: flex;
@@ -18,7 +24,7 @@
     flex-direction: column;
     flex-grow: 1;
     .logo {
-      background: var(--active-indicator-color);
+      background: $active-indicator-color;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -30,17 +36,17 @@
       display: flex;
       height: 100%;
       .menu-expanded-icon{
-        width: var(--sidebar-width);
-        background-color: var(--custom-primary-color);
+        width: $sidebar-width;
+        background-color: $custom-primary-color;
       }
       .menu-expanded-submenu{
-        width: calc(100% - var(--sidebar-width));
+        width: calc(100% - $sidebar-width);
       }
     }
     .logout{
       box-shadow: 0px -2px 0px 0px rgba(1,1,1,1.1);
-      width: var(--sidebar-width);
-      background-color: var(--custom-primary-color);
+      width: $sidebar-width;
+      background-color: $custom-primary-color;
       .logout-item {
         margin-top: auto;
         height: 70px;
@@ -71,7 +77,7 @@
 }
 
 .toolbar{
-  background: var(--active-indicator-color);
+  background: $active-indicator-color;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,19 +86,19 @@
 }
 
 .content{
-  width: var(--sidebar-width + 100%);
-  margin-left: var(--sidebar-width);
+  width: calc($sidebar-width + 100%);
+  margin-left: $sidebar-width;
   padding: 10px;
   height: 100%;
   transition: margin-left 0.3s ease;
 }
 
 .content.menu-expanded {
-  margin-left: var(--sidebar-expanded);
+  margin-left: $sidebar-expanded;
 }
 
 .expanded{
-  width: var(--sidebar-expanded);
+  width: $sidebar-expanded;
 }
 
 // estilização da lista
@@ -122,7 +128,7 @@
 }
 
 .sidebar li.active .indicator {
-  background: var(--active-indicator-color);
+  background: $active-indicator-color;
 }
 
 .sidebar li i {
@@ -158,6 +164,17 @@
   padding: 10px;
   cursor: pointer;
   transition: background 0.3s;
+}
+
+.tab-close{
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  font-size: 13px;
+  text-align: center;
+  margin-bottom: 15px;
+  margin-left: 10px;
+  z-index: 99999;
 }
 
 .popup-menu li:hover {

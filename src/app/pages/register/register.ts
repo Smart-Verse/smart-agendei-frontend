@@ -1,22 +1,23 @@
 import {Type} from "@angular/core";
-import {PersonModalComponent} from "../../components/person-modal/person-modal.component";
+import {ClientComponent} from "../../components/client/client.component";
+import {ServiceComponent} from "../../components/service/service.component";
 
 export const config: RegisterRoutes[] = [
   {
-    header: "Cadastro de pessoas",
-    view: "person",
-    route: "person",
+    header: "Cadastro de clientes",
+    view: "client",
+    route: "client",
     paramExtra: "",
     defaultFilter: "",
-    component: PersonModalComponent
+    component: ClientComponent
   },
   {
     header: "Cadastro de serviços",
-    view: "services",
-    route: "services",
+    view: "service",
+    route: "service",
     paramExtra: "",
     defaultFilter: "",
-    component: PersonModalComponent
+    component: ServiceComponent
   }
 ]
 
@@ -26,5 +27,6 @@ export class RegisterRoutes {
   route: string = "person";
   paramExtra: string = "";
   defaultFilter: string = "";
-  component: Type<any> = PersonModalComponent;
+  component: Type<any> = ClientComponent;
+  loadComponent?: () => Promise<Type<any>>;
 }

@@ -1,7 +1,7 @@
 [
   {
-    "route": "services",
-    "hash": "services",
+    "route": "service",
+    "hash": "service",
     "filters": [
       {
         "field": "name",
@@ -17,8 +17,8 @@
     ]
   },
   {
-    "route": "person",
-    "hash": "person",
+    "route": "client",
+    "hash": "client",
     "filters": [
       {
         "field": "name",

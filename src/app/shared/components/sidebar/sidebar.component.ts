@@ -1,33 +1,32 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
 import { SharedCommonModule } from '../../common/shared-common.module';
-import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
+import { RouterLink, RouterOutlet} from '@angular/router';
 import { TooltipModule } from 'primeng/tooltip';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { SidebarSubmenuComponent } from './sidebar-submenu/sidebar-submenu.component';
-
 import {MenuModule} from "primeng/menu";
-
 import {ImageUploadService} from "../inputs/image-upload/image-upload.service";
 import {ThemeService} from "../../services/theme/theme.service";
 import {TranslateService} from "../../services/translate/translate.service";
-import {MenuItens} from "./config/menu-itens";
-
-
-
+import {MenuItens} from "../../../config/sidebar/menu-itens";
+import { RouterModule } from '@angular/router';
+import { TabsModule } from 'primeng/tabs';
 
 @Component({
     selector: 'app-sidebar',
-  imports: [
-    SharedCommonModule,
-    RouterLink,
-    TooltipModule,
-    AvatarModule,
-    AvatarGroupModule,
-    RouterOutlet,
-    SidebarSubmenuComponent,
-    MenuModule
-  ],
+    imports: [
+        SharedCommonModule,
+        RouterLink,
+        TooltipModule,
+        AvatarModule,
+        AvatarGroupModule,
+        RouterOutlet,
+        SidebarSubmenuComponent,
+        MenuModule,
+        TabsModule,
+        RouterModule
+    ],
     providers: [
         ImageUploadService
     ],
@@ -36,16 +35,23 @@ import {MenuItens} from "./config/menu-itens";
 })
 export class SidebarComponent implements OnInit {
 
+  @Input() tabSuport: boolean = false;
+  @Input() currentTab: string = "dashboard";
+  @Input() currentMenu: any;
+
+  tabs: { title: string; icon: string; route: string, fixed: boolean }[] = [];
+
   theme: string = 'aura-dark-purple';
   menu = new MenuItens();
   isExpanded = false;
   menuItems: any;
-  currentMenu: any;
   showSidebar: boolean = true;
   showSidebarMobile: boolean = false;
   screenWidth: number = 0;
   isMobile: boolean = false;
   image: string | null = null;
+
+
 
   constructor(
     private readonly imageService: ImageUploadService,
@@ -61,15 +67,16 @@ export class SidebarComponent implements OnInit {
     this.onVerifyMobile();
     this.onSetConfigurationMobile();
     //this.onLoadImage();
-
+    this.tabs.push(this.currentMenu);
   }
 
   toggleMenu(menu: any) {
     this.isExpanded = false;
     if(menu.submenu.length > 0){
       this.isExpanded = true;
-
     }
+
+    this.onSetTab(menu, this.isExpanded);
     this.currentMenu = menu;
     this.onDisableAndSetActiveLink();
   }
@@ -132,6 +139,40 @@ export class SidebarComponent implements OnInit {
       this.showSidebar = true;
     }
   }
+
+  onSetTab(menu: any, isExpanded: boolean) {
+
+    if(this.tabSuport && !isExpanded){
+      let exists = this.tabs.find((tab: any) => tab.title === menu.name);
+      if(exists){
+        this.currentTab = menu.route;
+        return;
+      }
+
+      this.tabs.push({
+        title: menu.name,
+        icon: menu.icon,
+        route: menu.route,
+        fixed: menu.fixed,
+      })
+      this.currentTab = menu.route;
+    }
+  }
+
+  onMenuSelected(menu: any){
+    //validar não inserir menus repetidos
+    this.onSetTab(menu, false);
+  }
+
+  onTabClose(menu: any){
+    this.tabs = this.tabs.filter(tab => tab.title !== menu.title);
+    this.currentTab = this.tabs[this.tabs.length - 1].route;
+  }
+
+  onTranslateMenu(name: string){
+    return this.translateService.translate(name);
+  }
+
 
 /*
   //Exclusivo para uso aqui

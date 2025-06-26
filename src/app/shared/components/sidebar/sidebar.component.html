@@ -10,14 +10,13 @@
         <div class="menu-expanded-icon">
           <li *ngFor="let item of menuItems;" (click)="toggleMenu(item)"
             [routerLink]="item.route"
-
             [id]="item.name">
             <span class="indicator"></span>
             <i [ngClass]="item.iconClass" pTooltip="{{ item.tooltip }}"></i>
           </li>
         </div>
         <div *ngIf="isExpanded" class="menu-expanded-submenu">
-          <app-sidebar-submenu (colapsed)="closeMenu()" [menu]="currentMenu"></app-sidebar-submenu>
+          <app-sidebar-submenu (menuItemSelected)="onMenuSelected($event)" (colapsed)="closeMenu()" [menu]="currentMenu"></app-sidebar-submenu>
         </div>
       </div>
       <div class="logout">
@@ -31,5 +30,24 @@
     </ul>
 </div>
 <div class="content" [class.menu-expanded]="isExpanded" (click)="closeMenu()">
+  @if(tabSuport){
+    <p-tabs [value]="currentTab">
+      <p-tablist>
+        @for(tab of tabs; track tab.route){
+          <p-tab [value]="tab.route" [routerLink]="tab.route">
+            <i [class]="tab.icon"></i>
+            <span>{{ tab.title }}</span>
+            @if(!tab.fixed){
+              <div (click)="onTabClose(tab)" class="tab-close">
+                x
+              </div>
+            }
+          </p-tab>
+        }
+      </p-tablist>
+    </p-tabs>
     <router-outlet></router-outlet>
+  } @else {
+    <router-outlet></router-outlet>
+  }
 </div>

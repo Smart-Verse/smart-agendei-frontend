@@ -1,22 +1,26 @@
-@import "../../styles/button.scss";
+
 .datatable{
   width: 100%;
-  height: calc(80% - 20px);
-    .btnsp{
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 15px;
+  height: calc(100% - 75px);
+  .actions-header{
+    display: flex;
+    justify-content: space-between;
+    .group-buttons{
+      display: flex;
+      gap: 10px;
+      align-items: center;
     }
+  }
   .table{
-    max-height: 70%;
+    max-height: 90%;
     overflow: auto;
   }
 }
 .filter {
-    .btn-tx{
-        text-align: center;
-        width: 100%;
-    }
+  .btn-tx{
+    text-align: center;
+    width: 100%;
+  }
 }
 .summary{
   display: flex;
@@ -29,4 +33,62 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+:host::ng-deep {
+  .p-button.p-button-icon-only {
+    width: 1.95rem;
+    padding: 0.20rem;
+  }
+  .p-inputtext{
+    background-color: rgba($color: #e9e6e6, $alpha: 0.1);
+    border: none;
+    padding: 5px;
+  }
+  .p-datatable .p-datatable-tbody > tr > td {
+    text-align: left;
+    border: none;
+    border-width: 0 0 1px 0;
+    font-size: 12px;
+    padding: 0.05rem 0.20rem;
+  }
+  .p-datatable .p-datatable-thead > tr > th {
+    font-size: 12px;
+    padding: 0.20rem 0.20rem;
+  }
+  .p-treetable .p-treetable-tbody > tr > td {
+    text-align: left;
+    border: none;
+    border-width: 0 0 1px 0;
+    font-size: 12px;
+    padding: 0.05rem 0.20rem;
+  }
+  .p-paginator{
+    padding: 5px;
+  }
+
+  //.p-paginator .p-paginator-pages .p-paginator-page {
+  //  font-size: 8px;
+  //  min-width: 1.3rem;
+  //  height: 1.5rem;
+  //  background-color: #428BFE;
+  //  padding: 10px;
+  //}
+
+  .p-paginator .p-paginator-first, .p-paginator .p-paginator-prev, .p-paginator .p-paginator-next, .p-paginator .p-paginator-last{
+    font-size: 8px;
+    min-width: 1.3rem;
+    height: 1.0rem;
+    padding: 0;
+  }
+  .p-dropdown{
+    font-size: 10px;
+    min-width: 1.3rem;
+    min-height: 1.0rem;
+    height: 0.15rem;
+  }
+  .p-select {
+    font-size: 8px;
+    height: 1.95rem;
+  }
+
 }

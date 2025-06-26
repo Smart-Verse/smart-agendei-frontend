@@ -1,108 +1,215 @@
 <div class="datatable">
-    <p-confirmDialog />
-    <div class="btnsp">
-        <button
-            pButton
-            pRipple
-            (click)="onRegisterData(null,2)"
-            label="Adicionar">
-        </button>
-        <button
-            pButton
-            pRipple
-            (click)="onShowFilters()"
-            icon="pi pi-filter">
-        </button>
+  <p-confirmDialog />
+  <div class="actions-header">
+    <div class="group-buttons">
+      <p-button
+        (click)="onRegisterData(null,2)"
+        pRipple
+        severity="success"
+        [outlined]="true"
+        styleClass="p-button-text"
+        icon="pi pi-plus"/>
+      <p-button
+        (click)="onRegisterData(null,2)"
+        pRipple
+        severity="danger"
+        [outlined]="true"
+        styleClass="p-button-text"
+        icon="pi pi-minus"/>
+      <p-button
+        (click)="onShowFilters()"
+        pRipple
+        *ngIf="config.enableFilter"
+        [outlined]="true"
+        styleClass="p-button-text"
+        icon="pi pi-filter"/>
+      <p-button
+        *ngIf="config.enablePrint"
+        (click)="onShowFilters()"
+        pRipple
+        severity="info"
+        [outlined]="true"
+        styleClass="p-button-text"
+        icon="pi pi-print"/>
+      <p-button
+        *ngIf="config.enableRefresh"
+        (click)="onRefreshData()"
+        pRipple
+        [outlined]="true"
+        styleClass="p-button-text"
+        icon="pi pi-refresh"/>
+      <p-button
+        *ngIf="config.enableSearch"
+        (click)="onRefreshData()"
+        pRipple
+        [outlined]="true"
+        styleClass="p-button-text"
+        icon="pi pi-search"/>
     </div>
-    <div class="table">
-        <p-table
-            [columns]="config.fields"
-            [value]="config.values"
-            [rows]="10"
-            styleClass="p-datatable-sm"
-            [dataKey]="'id'"
-            [autoLayout]="true"
-            (onPage)="pageChange($event)"
-            [rowsPerPageOptions]="[10, 20, 50]"
-            [tableStyle]="{ 'min-width': '50rem'}">
-          <ng-template pTemplate="caption">
-            <div class="flex">
-              <p-iconField iconPosition="left" class="ml-auto">
-                <p-inputIcon>
-                  <i class="pi pi-search"></i>
-                </p-inputIcon>
-                <input
-                  pInputText
-                  type="text"
-                  placeholder="Buscar" />
-              </p-iconField>
+    <div class="group-paginator">
+      <p-paginator
+        *ngIf="config.enablePagginator"
+        (onPageChange)="pageChange($event)"
+        [first]="1"
+        [rows]="config.size"
+        [totalRecords]="config.totalRecords"
+        [showCurrentPageReport]="true"
+        [showPageLinks]="false"
+        [showJumpToPageDropdown]="false"
+        appendTo="body"
+        dropdownAppendTo="body"/>
+    </div>
+  </div>
+  <div *ngIf="!isTreetable" class="table">
+    <p-table
+      [columns]="config.fields"
+      [value]="config.values"
+      [rows]="10"
+      selectionMode="single"
+      [(selection)]="selectedItem"
+      [metaKeySelection]="false"
+      styleClass="p-datatable-sm"
+      [dataKey]="'id'"
+      [autoLayout]="true"
+      (onRowSelect)="onSelection($event)"
+      (onPage)="pageChange($event)"
+      [rowsPerPageOptions]="[10, 20, 50]"
+      [tableStyle]="{ 'min-width': '50rem'}">
+      <ng-template pTemplate="caption">
+        <div class="flex">
+          <p-iconField *ngIf="config.enableSearch" iconPosition="left" class="ml-auto">
+            <p-inputIcon>
+              <i class="pi pi-search"></i>
+            </p-inputIcon>
+            <input
+              pInputText
+              type="text"
+              placeholder="Buscar" />
+          </p-iconField>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th style="width: 1%"><p-tableHeaderCheckbox /></th>
+          <th [style]="'width:' + col.width " *ngFor="let col of columns">
+            {{ col.header }}
+          </th>
+          <th style="width: 10%;text-align: center">
+            Ações
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td style="width: 1%">
+            <p-tableCheckbox [value]="rowData" />
+          </td>
+          <td [style]="'width:' + col.width " *ngFor="let col of columns">
+            {{ onRowData(rowData,col.field, col) }}
+          </td>
+          <td style="width: 10%;">
+            <div class="actions">
+              <p-button
+                type="button"
+                pRipple
+                styleClass="p-button-text"
+                icon="pi pi-pencil"
+                (click)="onRegisterData(rowData, 1)">
+              </p-button>
+              <p-button
+                type="button"
+                pRipple
+                styleClass="p-button-text"
+                icon="pi pi-trash"
+                (click)="onDeleteData(rowData, 0)">
+              </p-button>
             </div>
-          </ng-template>
-            <ng-template pTemplate="header" let-columns>
-                <tr>
-                    <th style="width: 1%"><p-tableHeaderCheckbox /></th>
-                    <th [style]="'width:' + col.width " *ngFor="let col of columns">
-                        {{ col.header }}
-                    </th>
-                    <th style="width: 10%;text-align: center">
-                        Ações
-                    </th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-rowData let-columns="columns">
-                <tr>
-                    <td style="width: 1%">
-                        <p-tableCheckbox [value]="rowData" />
-                    </td>
-                    <td [style]="'width:' + col.width " *ngFor="let col of columns">
-                        {{ onRowData(rowData,col.field, col) }}
-                    </td>
-                    <td style="width: 10%;">
-                      <div class="actions">
-                        <p-button
-                          type="button"
-                          pRipple
-                          styleClass="p-button-text"
-                          icon="pi pi-pencil"
-                          (click)="onRegisterData(rowData, 1)">
-                        </p-button>
-                        <p-button
-                          type="button"
-                          pRipple
-                          styleClass="p-button-text"
-                          icon="pi pi-trash"
-                          (click)="onDeleteData(rowData, 0)">
-                        </p-button>
-                      </div>
-                    </td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="summary">
-              <div class="summary">
-                <p-button type="button" (onClick)="onRefreshData()" icon="pi pi-refresh" styleClass="p-button-text" />
-                <p-paginator
-                  (onPageChange)="pageChange($event)"
-                  [rows]="config.size"
-                  appendTo="body"
-                  dropdownAppendTo="body"
-                  [totalRecords]="config.totalRecords"
-                  [rowsPerPageOptions]="[5,10, 20, 30]" />
-              </div>
-            </ng-template>
-        </p-table>
-    </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div *ngIf="isTreetable">
+    <p-treeTable
+      [value]="config.treeValues"
+      [columns]="config.fields"
+      [rows]="10"
+      styleClass="p-datatable-sm"
+      [dataKey]="'id'"
+      [autoLayout]="true"
+      (onPage)="pageChange($event)"
+      [rowsPerPageOptions]="[10, 20, 50]"
+      [tableStyle]="{'min-width':'50rem'}">
+      <ng-template pTemplate="caption">
+        <div class="flex">
+          <p-iconField iconPosition="left" class="ml-auto">
+            <p-inputIcon>
+              <i class="pi pi-search"></i>
+            </p-inputIcon>
+            <input
+              pInputText
+              type="text"
+              placeholder="Buscar" />
+          </p-iconField>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th  [style]="'width:' + col.width " *ngFor="let col of columns">
+            {{ col.header }}
+          </th>
+          <th style="width: 18%;">
+            Ações
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+        <tr [ttRow]="rowNode">
+          <td *ngFor="let col of columns; let i = index">
+            <p-treeTableToggler [rowNode]="rowNode" *ngIf="i === 0" />
+            {{ rowData[col.field] }}
+          </td>
+          <td style="width: 18%;">
+            <button
+              style="margin-right: 5px;"
+              type="button"
+              pButton
+              pRipple
+              icon="pi pi-plus"
+              (click)="onRegisterDataTree(rowData,2,rowNode)">
+            </button>
+            <button
+              style="margin-right: 5px;"
+              type="button"
+              pButton
+              pRipple
+              icon="pi pi-pencil"
+              (click)="onRegisterDataTree(rowData, 1,rowNode)">
+            </button>
+            <button
+              type="button"
+              pButton
+              pRipple
+              icon="pi pi-trash"
+              (click)="onDeleteData(rowData, 0)">
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-treeTable>
+  </div>
 </div>
 <div class="filter">
-    <p-sidebar [(visible)]="sidebarVisible" position="right">
-        <ng-template pTemplate="header">
-            <span class="font-semibold text-xl">Filtros</span>
-        </ng-template>
-        <ng-template pTemplate="content">
-            <p-button pRipple (onClick)="onRefreshData()"  [outlined]="false"  styleClass="p-button-rounded w-full">
-                <div class="btn-tx">
-                    Filtrar
-                </div>
-            </p-button>
-        </ng-template>
-    </p-sidebar>
+  <p-sidebar [(visible)]="sidebarVisible" position="right">
+    <ng-template pTemplate="header">
+      <span class="font-semibold text-xl">Filtros</span>
+    </ng-template>
+    <ng-template pTemplate="content">
+      <p-button pRipple (onClick)="onRefreshData()"  [outlined]="false"  styleClass="p-button-rounded w-full">
+        <div class="btn-tx">
+          Filtrar
+        </div>
+      </p-button>
+    </ng-template>
+  </p-sidebar>
 </div>
