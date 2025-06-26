@@ -1,0 +1,52 @@
+<div [formGroup]="formGroup">
+  <div class="prositions formgrid grid">
+    <app-input-text
+      formControlName="name"
+      name="name"
+      [field]="formGroup"
+      class="field col-12 md:col-8 c-margin"
+      [label]="translateService.translate('common_name')"
+      type="text">
+    </app-input-text>
+    <app-dropdown
+      formControlName="status"
+      name="status"
+      [options]="_status"
+      optionLabel="value"
+      [field]="formGroup"
+      class="field col-12 md:col-4 c-margin"
+      [label]="translateService.translate('common_status')"
+      type="text">
+    </app-dropdown>
+    <app-input-number
+      formControlName="price"
+      name="price"
+      [field]="formGroup"
+      class="field col-12 md:col-6 c-margin"
+      [label]="translateService.translate('common_price')"
+      type="text">
+    </app-input-number>
+    <app-input-number
+      formControlName="executionTime"
+      name="executionTime"
+      [minDecimal]="0"
+      [field]="formGroup"
+      class="field col-12 md:col-6 c-margin"
+      [label]="translateService.translate('common_executionTime')"
+      type="text">
+    </app-input-number>
+    <app-input-text
+      formControlName="description"
+      fieldType="input-text-area"
+      name="ibge"
+      [field]="formGroup"
+      class="field col-12 md:col-12 c-margin"
+      [label]="translateService.translate('common_description')"
+      type="text">
+    </app-input-text>
+  </div>
+</div>
+<div class="buttons">
+  <p-button  [label]="translateService.translate('common_action_save')" (onClick)="onSave()"/>
+  <p-button  [label]="translateService.translate('common_action_cancel')" (onClick)="onCancel()"/>
+</div>

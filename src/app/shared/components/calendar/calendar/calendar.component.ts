@@ -10,7 +10,7 @@ import {CalendarService} from "../../../services/calendar/calendar.service";
 
 @Component({
   selector: 'app-calendar',
-  imports: [CommonModule, DayViewComponent, WeekViewComponent, MonthViewComponent, MobileViewComponent],
+  imports: [CommonModule, DayViewComponent, WeekViewComponent, MonthViewComponent],
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.scss'
 })

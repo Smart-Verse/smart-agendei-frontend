@@ -10,9 +10,14 @@
     ],
     "fields": [
       {
-        "field": "description",
-        "header": "Descricao",
-        "width": "80%"
+        "field": "name",
+        "header": "Nome",
+        "width": "70%"
+      },
+      {
+        "field": "price",
+        "header": "Valor",
+        "width": "10%"
       }
     ]
   },
