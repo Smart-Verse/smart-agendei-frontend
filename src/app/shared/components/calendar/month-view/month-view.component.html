@@ -1,0 +1,42 @@
+<div class="month-view">
+  <div class="month-header">
+    <div class="weekday-headers">
+      <div *ngFor="let day of weekDayNames" class="weekday-header">
+        {{ day }}
+      </div>
+    </div>
+  </div>
+
+  <div class="month-grid">
+    <div
+      *ngFor="let week of calendarWeeks"
+      class="week-row"
+    >
+      <div
+        *ngFor="let day of week"
+        class="day-cell"
+        [class.other-month]="!isSameMonth(day, currentDate)"
+        [class.today]="isToday(day)"
+        [class.has-appointments]="getDayAppointments(day).length > 0"
+      >
+        <div class="day-number">{{ day.getDate() }}</div>
+        <div class="appointments">
+          <div
+            *ngFor="let appointment of getDayAppointments(day).slice(0, 3); let i = index"
+            class="appointment-indicator"
+            [style.background-color]="appointment.cellColor"
+            [title]="getAppointmentTooltip(appointment)"
+          >
+            <span class="appointment-text">{{ appointment.description }}</span>
+          </div>
+          <div
+            *ngIf="getDayAppointments(day).length > 3"
+            class="more-appointments"
+          >
+            +{{ getDayAppointments(day).length - 3 }} more
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

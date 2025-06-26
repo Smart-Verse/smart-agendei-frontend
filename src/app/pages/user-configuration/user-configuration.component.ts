@@ -64,6 +64,7 @@ export class UserConfigurationComponent extends BaseComponent implements OnInit 
           this.toastService.success({summary: this.translateService.translate("common_message"), detail: this.translateService.translate("common_message_success")});
         },
         error: error => {
+          this.toastService.error({summary: this.translateService.translate("common_message"), detail: error});
           this.loadingService.showLoading.next(false);
         }
       })

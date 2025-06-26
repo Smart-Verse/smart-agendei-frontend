@@ -15,9 +15,9 @@ export function authInterceptor(originalRequest: HttpRequest<unknown>, next: Htt
     let request: HttpRequest<unknown>;
 
     let headers = new HttpHeaders();
-  if(cookiesService.get(EnumCookie.AUTHORIZATION) !== null){
-    headers = headers.set('Authorization', "Bearer " + cookiesService.get(EnumCookie.AUTHORIZATION));
-  }
+    if(cookiesService.get(EnumCookie.AUTHORIZATION) !== null){
+      headers = headers.set('Authorization', "Bearer " + cookiesService.get(EnumCookie.AUTHORIZATION));
+    }
 
 
 

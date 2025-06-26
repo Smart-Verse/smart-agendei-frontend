@@ -1,0 +1,41 @@
+<div class="day-view">
+  <div class="day-header">
+    <h2>{{ formatDate(currentDate) }}</h2>
+  </div>
+
+  <div class="time-slots">
+    <div
+      *ngFor="let slot of timeSlots"
+      class="time-slot"
+    >
+      <div class="time-label">
+        {{ formatHour(slot.hour) }}
+      </div>
+      <div class="slot-content">
+        <div
+          *ngFor="let layer of slot.appointmentLayers; let layerIndex = index"
+          class="appointment-layer"
+          [style.z-index]="layerIndex + 1"
+        >
+          <div
+            *ngFor="let appointment of layer"
+            class="appointment"
+            [style.background-color]="appointment.cellColor"
+            [style.height.px]="getAppointmentHeight(appointment)"
+            [style.top.px]="getAppointmentTop(appointment)"
+            [style.width.%]="getAppointmentWidth(layer.length)"
+            [style.left.%]="getAppointmentLeft(layer.indexOf(appointment), layer.length)"
+          >
+            <div class="appointment-content">
+              <div class="appointment-title">{{ appointment.description }}</div>
+              <div class="appointment-user">{{ appointment.userName }}</div>
+              <div class="appointment-time">
+                {{ formatTime(appointment.startTime) }} - {{ formatTime(appointment.endTime) }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

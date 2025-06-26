@@ -54,6 +54,7 @@ export class UserConfigurationConfig {
       name: formGroup.get('name')?.value,
       email: formGroup.get('email')?.value,
       userPhoto: foto,
+      phone: formGroup.get('phone')?.value,
       theme: formGroup.get('theme')?.value["key"],
       lang: formGroup.get('lang')?.value["key"],
       hash: formGroup.get('hash')?.value,

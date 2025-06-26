@@ -1,0 +1,148 @@
+<div class="mobile-view">
+  <!-- Mobile Header -->
+  <div class="mobile-header">
+    <div class="header-gradient"></div>
+    <div class="header-content">
+      <div class="date-navigation">
+        <button class="nav-btn" (click)="goToPrevious()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15,18 9,12 15,6"></polyline>
+          </svg>
+        </button>
+
+        <div class="current-date">
+          <div class="date-main">{{ formatCurrentDate() }}</div>
+          <div class="date-sub">{{ formatCurrentDay() }}</div>
+        </div>
+
+        <button class="nav-btn" (click)="goToNext()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9,18 15,12 9,6"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <button class="today-btn" (click)="goToToday()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        Today
+      </button>
+    </div>
+  </div>
+
+  <!-- Quick Stats -->
+  <div class="quick-stats">
+    <div class="stat-card">
+      <div class="stat-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12,6 12,12 16,14"></polyline>
+        </svg>
+      </div>
+      <div class="stat-content">
+        <div class="stat-number">{{ todayAppointments.length }}</div>
+        <div class="stat-label">Today</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon upcoming">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"></path>
+          <path d="M9 12l2 2 4-4"></path>
+        </svg>
+      </div>
+      <div class="stat-content">
+        <div class="stat-number">{{ upcomingAppointments.length }}</div>
+        <div class="stat-label">Upcoming</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timeline View -->
+  <div class="timeline-container">
+    <div class="timeline-header">
+      <h3>{{ getTimelineTitle() }}</h3>
+      <div class="timeline-indicator"></div>
+    </div>
+
+    <div class="timeline-content" *ngIf="currentAppointments.length > 0; else noAppointments">
+      <div
+        *ngFor="let appointment of currentAppointments; let i = index"
+        class="appointment-card"
+        [style.animation-delay.ms]="i * 100"
+      >
+        <div class="appointment-time-indicator">
+          <div class="time-dot" [style.background-color]="appointment.cellColor"></div>
+          <div class="time-line" *ngIf="i < currentAppointments.length - 1"></div>
+        </div>
+
+        <div class="appointment-content" [style.border-left-color]="appointment.cellColor">
+          <div class="appointment-header">
+            <div class="appointment-title">{{ appointment.description }}</div>
+            <div class="appointment-duration">{{ getDurationText(appointment) }}</div>
+          </div>
+
+          <div class="appointment-details">
+            <div class="appointment-user">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              {{ appointment.userName }}
+            </div>
+
+            <div class="appointment-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12,6 12,12 16,14"></polyline>
+              </svg>
+              {{ formatTime(appointment.startTime) }} - {{ formatTime(appointment.endTime) }}
+            </div>
+          </div>
+
+          <div class="appointment-status" [class]="getAppointmentStatus(appointment)">
+            {{ getAppointmentStatusText(appointment) }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noAppointments>
+      <div class="empty-state">
+        <div class="empty-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+        </div>
+        <div class="empty-title">No appointments</div>
+        <div class="empty-subtitle">Enjoy your free time!</div>
+      </div>
+    </ng-template>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="quick-actions">
+    <button class="action-btn primary">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+      </svg>
+      Add Event
+    </button>
+
+    <button class="action-btn secondary">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+      </svg>
+      Messages
+    </button>
+  </div>
+</div>

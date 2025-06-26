@@ -5,14 +5,19 @@ import {MenuService} from "../../services/menu/menu.service";
 import {Tooltip} from "primeng/tooltip";
 import {UserConfigurationService} from "../../../services/user-configuration/user-configuration.service";
 import {LoadingService} from "../../services/loading/loading.service";
+import {HttpModule} from "../../../config/http/http.module";
+import {HttpClient} from "@angular/common/http";
+import {SharedCommonModule} from "../../common/shared-common.module";
 
 
 @Component({
   selector: 'app-sidebar-lite',
   providers: [
+    HttpClient,
     UserConfigurationService
   ],
   imports: [
+    SharedCommonModule,
     CommonModule,
     RouterOutlet,
     RouterLink,

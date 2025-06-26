@@ -1,0 +1,50 @@
+<div class="week-view">
+  <div class="week-header">
+    <div class="time-column"></div>
+    <div
+      *ngFor="let day of weekDays"
+      class="day-header"
+      [class.today]="isToday(day)"
+    >
+      <div class="day-name">{{ formatDayName(day) }}</div>
+      <div class="day-number">{{ day.getDate() }}</div>
+    </div>
+  </div>
+
+  <div class="week-body">
+    <div class="time-column">
+      <div
+        *ngFor="let hour of hours"
+        class="time-label"
+      >
+        {{ formatHour(hour) }}
+      </div>
+    </div>
+
+    <div class="days-grid">
+      <div
+        *ngFor="let day of weekDays; let dayIndex = index"
+        class="day-column"
+      >
+        <div
+          *ngFor="let hour of hours"
+          class="hour-cell"
+          [class.current-hour]="isCurrentHour(day, hour)"
+        >
+          <div
+            *ngFor="let appointment of getAppointmentsForDayHour(day, hour)"
+            class="appointment"
+            [style.background-color]="appointment.cellColor"
+            [style.height.px]="getAppointmentHeight(appointment)"
+            [style.top.px]="getAppointmentTop(appointment)"
+          >
+            <div class="appointment-content">
+              <div class="appointment-title">{{ appointment.description }}</div>
+              <div class="appointment-time">{{ formatTime(appointment.startTime) }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
