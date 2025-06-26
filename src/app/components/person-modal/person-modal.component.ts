@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SharedCommonModule} from "../../shared/common/shared-common.module";
-import {ToastService} from "../../services/toast/toast.service";
+
 import {DatePipe} from "@angular/common";
 import {ImageUploadService} from "../../shared/components/inputs/image-upload/image-upload.service";
 import {FormGroup} from "@angular/forms";
@@ -10,6 +10,7 @@ import {TranslateService} from "../../shared/services/translate/translate.servic
 import {ActivatedRoute} from "@angular/router";
 import {PersonConfig} from "./person.config";
 import {gender, maritalStatus, status} from "../../shared/util/constants";
+import {ToastService} from "../../shared/services/toast/toast.service";
 
 @Component({
   selector: 'app-person-modal',
