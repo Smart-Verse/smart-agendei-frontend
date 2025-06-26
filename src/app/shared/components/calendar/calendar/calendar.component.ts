@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {DayViewComponent} from "../day-view/day-view.component";
 import {WeekViewComponent} from "../week-view/week-view.component";
@@ -10,18 +10,21 @@ import {CalendarService} from "../../../services/calendar/calendar.service";
 
 @Component({
   selector: 'app-calendar',
-  imports: [CommonModule, DayViewComponent, WeekViewComponent, MonthViewComponent],
+  imports: [CommonModule, DayViewComponent, WeekViewComponent, MonthViewComponent, MobileViewComponent],
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.scss'
 })
 export class CalendarComponent implements OnInit, OnDestroy  {
+
+  @Input() isMobileView: boolean = false;
+
   private destroy$ = new Subject<void>();
 
   currentDate: Date = new Date();
   currentViewMode: ViewMode = 'month';
   currentAppointments: CalendarEvent[] = [];
   appointments: CalendarEvent[] = [];
-  isMobileView: boolean = false;
+
 
   viewModes: ViewMode[] = ['day', 'week', 'month'];
 

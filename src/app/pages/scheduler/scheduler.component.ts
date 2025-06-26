@@ -7,7 +7,7 @@ import {Appointment, CalendarEvent} from "../../shared/interfaces/appointment.in
 
 @Component({
   selector: 'app-scheduler',
-  imports: [SharedCommonModule, MobileViewComponent],
+  imports: [SharedCommonModule, CalendarComponent],
   templateUrl: './scheduler.component.html',
   styleUrl: './scheduler.component.scss'
 })

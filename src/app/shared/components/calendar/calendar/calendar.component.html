@@ -1,62 +1,66 @@
 <div class="calendar-container">
-  <!-- Desktop View -->
-  <div class="desktop-view" [class.hidden]="isMobileView">
-    <div class="calendar-toolbar">
-      <div class="navigation-buttons">
-        <button
-          class="nav-button"
-          (click)="goToPrevious()"
-        >
-          &#8249;
-        </button>
-        <button
-          class="nav-button"
-          (click)="goToNext()"
-        >
-          &#8250;
-        </button>
-        <button
-          class="today-button"
-          (click)="goToToday()"
-        >
-          Today
-        </button>
-      </div>
+  @if(isMobileView) {
+    <div class="mobile-container">
+      <app-mobile-view [currentDate]="currentDate" [appointments]="appointments"></app-mobile-view>
+    </div>
+  } @else {
+    <div class="desktop-view">
+      <div class="calendar-toolbar">
+        <div class="navigation-buttons">
+          <button
+            class="nav-button"
+            (click)="goToPrevious()"
+          >
+            &#8249;
+          </button>
+          <button
+            class="nav-button"
+            (click)="goToNext()"
+          >
+            &#8250;
+          </button>
+          <button
+            class="today-button"
+            (click)="goToToday()"
+          >
+            Today
+          </button>
+        </div>
 
-      <div class="current-period">
-        <h1>{{ getCurrentPeriodTitle() }}</h1>
-      </div>
+        <div class="current-period">
+          <h1>{{ getCurrentPeriodTitle() }}</h1>
+        </div>
 
-      <div class="view-buttons">
-        <button
-          *ngFor="let view of viewModes"
-          class="view-button"
-          [class.active]="view === currentViewMode"
-          (click)="setViewMode(view)"
-        >
-          {{ view | titlecase }}
-        </button>
+        <div class="view-buttons">
+          <button
+            *ngFor="let view of viewModes"
+            class="view-button"
+            [class.active]="view === currentViewMode"
+            (click)="setViewMode(view)"
+          >
+            {{ view | titlecase }}
+          </button>
+        </div>
+      </div>
+      <div class="calendar-content">
+        <app-day-view
+          *ngIf="currentViewMode === 'day'"
+          [currentDate]="currentDate"
+          [appointments]="currentAppointments"
+        ></app-day-view>
+
+        <app-week-view
+          *ngIf="currentViewMode === 'week'"
+          [currentDate]="currentDate"
+          [appointments]="currentAppointments"
+        ></app-week-view>
+
+        <app-month-view
+          *ngIf="currentViewMode === 'month'"
+          [currentDate]="currentDate"
+          [appointments]="currentAppointments"
+        ></app-month-view>
       </div>
     </div>
-
-    <div class="calendar-content">
-      <app-day-view
-        *ngIf="currentViewMode === 'day'"
-        [currentDate]="currentDate"
-        [appointments]="currentAppointments"
-      ></app-day-view>
-
-      <app-week-view
-        *ngIf="currentViewMode === 'week'"
-        [currentDate]="currentDate"
-        [appointments]="currentAppointments"
-      ></app-week-view>
-
-      <app-month-view
-        *ngIf="currentViewMode === 'month'"
-        [currentDate]="currentDate"
-        [appointments]="currentAppointments"
-      ></app-month-view>
-    </div>
-  </div>
+  }
 </div>
