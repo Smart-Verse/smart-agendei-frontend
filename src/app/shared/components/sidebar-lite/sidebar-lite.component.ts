@@ -3,10 +3,15 @@ import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/route
 import {CommonModule} from "@angular/common";
 import {MenuService} from "../../services/menu/menu.service";
 import {Tooltip} from "primeng/tooltip";
+import {UserConfigurationService} from "../../../services/user-configuration/user-configuration.service";
+import {LoadingService} from "../../services/loading/loading.service";
 
 
 @Component({
   selector: 'app-sidebar-lite',
+  providers: [
+    UserConfigurationService
+  ],
   imports: [
     CommonModule,
     RouterOutlet,
@@ -25,10 +30,13 @@ export class SidebarLiteComponent implements OnInit {
   showSidebarMobile: boolean = false;
   screenWidth: number = 0;
   isMobile: boolean = false;
+  userName: string = "";
 
   constructor(
     private menuService: MenuService,
-    private router: Router
+    private router: Router,
+    private readonly userConfigurationService: UserConfigurationService,
+    private readonly loadingService: LoadingService
   ) {
     this._menuitens = this.menuService.menu
   }
@@ -37,6 +45,7 @@ export class SidebarLiteComponent implements OnInit {
     this.screenWidth = window.innerWidth;
     this.onVerifyMobile();
     this.onSetConfigurationMobile();
+    this.onLoadUserConfiguration();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -64,5 +73,17 @@ export class SidebarLiteComponent implements OnInit {
     }
   }
 
+  onLoadUserConfiguration(){
+    this.loadingService.showLoading.next(true);
+    this.userConfigurationService.getUser().subscribe({
+      next: (res) => {
+        this.userName = res.output.name;
+        this.loadingService.showLoading.next(false);
+      },
+      error: (err) => {
+        this.loadingService.showLoading.next(false);
+      }
+    });
+  }
 
 }

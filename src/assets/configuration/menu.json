@@ -28,7 +28,7 @@
     "submenu": []
   },
   {
-    "route": "user",
+    "route": "user-configuration",
     "iconClass": "pi pi-user",
     "tooltip": "Usuario",
     "name": "Usuario",

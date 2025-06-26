@@ -41,5 +41,13 @@
   "personal_field_gender": "Genero",
   "personal_field_maritalStatus": "Estado civil",
   "personal_field_nationality": "Nacionalidade",
-  "personal_field_birthplace": "Naturalidade"
+  "personal_field_birthplace": "Naturalidade",
+
+  "user_configuration": "Configurações do usuário",
+  "user_configuration_name": "Nome",
+  "user_configuration_email": "Email",
+  "user_configuration_phone": "Telefone",
+  "user_configuration_theme": "Tema",
+  "user_configuration_language": "Idioma"
+
 }

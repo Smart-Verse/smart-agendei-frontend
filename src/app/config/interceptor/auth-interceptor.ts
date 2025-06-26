@@ -1,9 +1,7 @@
 import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpHeaders, HttpRequest } from "@angular/common/http";
 import { catchError, Observable, tap, throwError } from "rxjs";
-
 import { Router } from "@angular/router";
 import { inject } from "@angular/core";
-
 import { environment } from "../../../environments/environment";
 import {CookiesService} from "../../shared/services/cookies/cookies.service";
 import {EnumCookie} from "../../shared/services/cookies/cookie.enum";

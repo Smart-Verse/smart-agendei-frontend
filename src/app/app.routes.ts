@@ -10,6 +10,7 @@ import {PersonComponent} from "./pages/person/person.component";
 import {SchedulerComponent} from "./pages/scheduler/scheduler.component";
 import {ConfigurationComponent} from "./pages/configuration/configuration.component";
 import {RegisterComponent} from "./pages/register/register.component";
+import {UserConfigurationComponent} from "./pages/user-configuration/user-configuration.component";
 
 export const routes: Routes = [
 
@@ -26,6 +27,7 @@ export const routes: Routes = [
       { path: 'person', component: PersonComponent },
       { path: 'scheduler', component: SchedulerComponent },
       { path: 'configuration', component: ConfigurationComponent },
+      { path: 'user-configuration', component: UserConfigurationComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ]
   },

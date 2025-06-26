@@ -14,16 +14,26 @@
         formControlName="name"
         name="name"
         [field]="formGroup"
-        class="field col-12 md:col-6 c-margin"
+        class="field col-12 md:col-4 c-margin"
         [label]="translateService.translate('user_configuration_name')"
         type="text">
       </app-input-text>
+      <app-input-mask
+        formControlName="phone"
+        name="phone"
+        mask="(99)9 9999-9999"
+        [disabled]="true"
+        [field]="formGroup"
+        class="field col-12 md:col-4 c-margin"
+        [label]="translateService.translate('user_configuration_phone')"
+        type="text">
+      </app-input-mask>
       <app-input-text
         formControlName="email"
         name="email"
         [disabled]="true"
         [field]="formGroup"
-        class="field col-12 md:col-6 c-margin"
+        class="field col-12 md:col-4 c-margin"
         [label]="translateService.translate('user_configuration_email')"
         type="text">
       </app-input-text>
@@ -48,7 +58,7 @@
     </div>
     <div class="buttons">
       <div>
-        <p-button  [label]="translateService.translate('common_save')" (onClick)="onSave()" />
+        <p-button  [label]="translateService.translate('common_action_save')" (onClick)="onSave()" />
       </div>
     </div>
 

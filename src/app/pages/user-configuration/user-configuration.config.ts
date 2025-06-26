@@ -39,6 +39,12 @@ export class UserConfigurationConfig {
       required: true,
       hidden: false,
       type: 'string'
+    },
+    {
+      fieldName: 'phone',
+      required: true,
+      hidden: false,
+      type: 'string'
     }
   ]
 
