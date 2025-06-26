@@ -8,20 +8,22 @@ import {FieldsService} from "../../../services/fields/fields.service";
 import {AutoCompleteModule} from "primeng/autocomplete";
 import {AutoFocusModule} from "primeng/autofocus";
 import {AppControlValueAccessor} from "../../app-control-value";
+import {Select} from "primeng/select";
 
 
 @Component({
     selector: 'app-dropdown',
-    imports: [
-        CommonModule,
-        DropdownModule,
-        FormsModule,
-        ReactiveFormsModule,
-        FloatLabelModule,
-        TooltipModule,
-        AutoCompleteModule,
-        AutoFocusModule
-    ],
+  imports: [
+    CommonModule,
+    DropdownModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FloatLabelModule,
+    TooltipModule,
+    AutoCompleteModule,
+    AutoFocusModule,
+    Select
+  ],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,

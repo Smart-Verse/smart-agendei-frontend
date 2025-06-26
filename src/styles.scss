@@ -31,6 +31,12 @@ html{
   p-inputnumber, .p-inputnumber {
     width: 100% !important;
   }
+  .p-inputtext{
+    background-color: rgba($color: #e9e6e6, $alpha: 0.1);
+    border: none;
+    padding: 5px;
+  }
+
 }
 ::-webkit-scrollbar {
   width: 5px;

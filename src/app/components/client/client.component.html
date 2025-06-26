@@ -1,1 +1,60 @@
-<p>client works!</p>
+<div [formGroup]="formGroup">
+  <div class="prositions formgrid grid">
+    <app-input-text
+      formControlName="name"
+      name="name"
+      [field]="formGroup"
+      class="field col-12 md:col-8 c-margin"
+      [label]="translateService.translate('common_name')"
+      type="text">
+    </app-input-text>
+    <app-dropdown
+      formControlName="status"
+      name="status"
+      [options]="_status"
+      optionLabel="value"
+      [field]="formGroup"
+      class="field col-12 md:col-4 c-margin"
+      [label]="translateService.translate('common_status')"
+      type="text">
+    </app-dropdown>
+    <app-input-date
+      formControlName="birthDate"
+      name="birthDate"
+      [field]="formGroup"
+      class="field col-12 md:col-6 c-margin"
+      [label]="translateService.translate('common_birthDate')"
+      type="text">
+    </app-input-date>
+    <app-input-mask
+      formControlName="cpf"
+      name="cpf"
+      mask="999.999.999-99"
+      [field]="formGroup"
+      class="field col-12 md:col-6 c-margin"
+      [label]="translateService.translate('common_cpf')"
+      type="text">
+    </app-input-mask>
+    <app-input-mask
+      formControlName="phone"
+      name="phone"
+      mask="(99) 9 9999-9999"
+      [field]="formGroup"
+      class="field col-12 md:col-6 c-margin"
+      [label]="translateService.translate('common_phone')"
+      type="text">
+    </app-input-mask>
+    <app-input-text
+      formControlName="email"
+      name="email"
+      [field]="formGroup"
+      class="field col-12 md:col-6 c-margin"
+      [label]="translateService.translate('common_email')"
+      type="text">
+    </app-input-text>
+  </div>
+</div>
+<div class="buttons">
+  <p-button  [label]="translateService.translate('common_action_save')" (onClick)="onSave()"/>
+  <p-button  [label]="translateService.translate('common_action_cancel')" (onClick)="onCancel()"/>
+</div>

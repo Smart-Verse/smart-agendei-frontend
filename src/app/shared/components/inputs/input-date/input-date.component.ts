@@ -10,20 +10,22 @@ import {DropdownModule} from "primeng/dropdown";
 import {AutoFocusModule} from "primeng/autofocus";
 import {AutoCompleteModule} from "primeng/autocomplete";
 import {AppControlValueAccessor} from "../../app-control-value";
+import {DatePicker} from "primeng/datepicker";
 
 @Component({
     selector: 'app-input-date',
-    imports: [
-        CommonModule,
-        CalendarModule,
-        FormsModule,
-        ReactiveFormsModule,
-        FloatLabelModule,
-        TooltipModule,
-        DropdownModule,
-        AutoFocusModule,
-        AutoCompleteModule
-    ],
+  imports: [
+    CommonModule,
+    CalendarModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FloatLabelModule,
+    TooltipModule,
+    DropdownModule,
+    AutoFocusModule,
+    AutoCompleteModule,
+    DatePicker
+  ],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
