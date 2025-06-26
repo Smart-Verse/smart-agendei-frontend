@@ -28,6 +28,13 @@
     "submenu": []
   },
   {
+    "route": "user",
+    "iconClass": "pi pi-user",
+    "tooltip": "Usuario",
+    "name": "Usuario",
+    "submenu": []
+  },
+  {
     "route": "configuration",
     "iconClass": "pi pi-cog",
     "tooltip": "Configurações",
