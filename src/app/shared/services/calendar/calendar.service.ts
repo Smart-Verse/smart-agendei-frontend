@@ -89,6 +89,7 @@ export class CalendarService {
         userName: item.userName.name,
         cellColor: item.cellColor,
         clientName: item.client.name,
+        status: item.status,
       };
 
       appointments.push(app);

@@ -1,10 +1,13 @@
+import {EStatusAppointment} from "../util/enums";
+
 export interface Appointment {
   startDate: string; // ISO date string
   endDate: string;   // ISO date string
   description: string;
   userName: string;
   cellColor: string; // hex color
-  clientName?: string
+  clientName?: string;
+  status?: EStatusAppointment;
 }
 
 export interface CalendarEvent extends Appointment {

@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CalendarEvent} from "../../../interfaces/appointment.interface";
 import {CalendarService} from "../../../services/calendar/calendar.service";
 import {CommonModule} from "@angular/common";
+import {EStatusAppointment} from "../../../util/enums";
 
 @Component({
   selector: 'app-mobile-view',
@@ -34,7 +35,6 @@ export class MobileViewComponent implements OnInit{
     const today = new Date();
     this.todayAppointments = this.calendarService.getAppointmentsForDate(today);
 
-    // Get upcoming appointments (next 7 days)
     this.upcomingAppointments = this.appointments.filter(appointment => {
       const appointmentDate = appointment.startTime;
       const nextWeek = new Date();
@@ -106,14 +106,17 @@ export class MobileViewComponent implements OnInit{
   }
 
   getAppointmentStatus(appointment: CalendarEvent): string {
-    const now = new Date();
-
-    if (appointment.endTime < now) {
-      return 'completed';
-    } else if (appointment.startTime <= now && appointment.endTime > now) {
-      return 'ongoing';
-    } else {
-      return 'upcoming';
+    switch (appointment.status) {
+      case EStatusAppointment.COMPLETED:
+        return 'completed';
+      case EStatusAppointment.APPOINTMENT_CONFIRMED:
+        return 'confirmscheduled';
+      case EStatusAppointment.SCHEDULED:
+        return 'scheduled';
+      case EStatusAppointment.NO_SHOW:
+        return 'upcoming';
+      default:
+        return 'unknown';
     }
   }
 
@@ -121,11 +124,13 @@ export class MobileViewComponent implements OnInit{
     const status = this.getAppointmentStatus(appointment);
     switch (status) {
       case 'completed':
-        return 'Completed';
-      case 'ongoing':
-        return 'In Progress';
+        return 'Finalizado';
+      case 'scheduled':
+        return 'Agendado';
+      case 'confirmscheduled':
+        return 'Agendamento confirmado';
       case 'upcoming':
-        return 'Upcoming';
+        return 'Não compareceu';
       default:
         return 'Scheduled';
     }

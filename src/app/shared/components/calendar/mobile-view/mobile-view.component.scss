@@ -1,15 +1,13 @@
 .mobile-view {
   height: 100%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   overflow-y: auto;
   position: relative;
-  border-radius: 20px;
+  border-radius: 50px;
 }
 
 .mobile-header {
   position: relative;
   padding: 2rem 1.5rem 1.5rem;
-  color: white;
   overflow: hidden;
   border-radius: 20px;
 }
@@ -46,7 +44,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
   cursor: pointer;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
@@ -313,18 +310,23 @@
 }
 
 .appointment-status.upcoming {
-  background: #dbeafe;
-  color: #1d4ed8;
-}
-
-.appointment-status.ongoing {
-  background: #dcfce7;
-  color: #166534;
+  background: #fedbe0;
+  color: #ed455d;
 }
 
 .appointment-status.completed {
-  background: #f3f4f6;
-  color: #374151;
+  background: #dbfee8;
+  color: #50f28c;
+}
+
+.appointment-status.scheduled {
+  background: #feeedb;
+  color: #fabd75;
+}
+
+.appointment-status.confirmscheduled {
+  background: #dbddfe;
+  color: #4f58e8;
 }
 
 .empty-state {
