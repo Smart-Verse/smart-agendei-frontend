@@ -1,7 +1,10 @@
+
 <div class="register">
-    <app-datatable
-      (onRefresh)="onLoadAllData($event)"
-      (onRegister)="onSelectedData($event)"
-      [config]="datatable">
-    </app-datatable>
+  <h2>{{translateService.translate(title)}}</h2>
+  <hr>
+  <app-datatable
+    (onRefresh)="onLoadAllData($event)"
+    (onRegister)="onSelectedData($event)"
+    [config]="datatable">
+  </app-datatable>
 </div>

@@ -31,3 +31,8 @@ export function base64ToArrayBuffer(base64: any): ArrayBuffer {
   }
   return bytes.buffer;
 }
+
+export function gerarCorHexAleatoria() {
+  const cor = Math.floor(Math.random() * 16777215).toString(16);
+  return `#${cor.padStart(6, '0')}`;
+}

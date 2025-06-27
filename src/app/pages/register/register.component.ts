@@ -33,7 +33,8 @@ export class RegisterComponent implements OnInit  {
   ref: DynamicDialogRef | undefined;
 
   datatable: DataTable = new DataTable();
-  routeComponent: string | null = "";
+  public routeComponent: string | null = "";
+  public title = "";
   configuration: RegisterRoutes = new RegisterRoutes();
   originalClose: any;
   isTreetable: boolean = false;
@@ -45,13 +46,14 @@ export class RegisterComponent implements OnInit  {
     private readonly registerService: RegisterService,
     private readonly dialogService: DialogService,
     private readonly toastService: ToastService,
-    private readonly translateService: TranslateService,
+    public readonly translateService: TranslateService,
     private readonly loadingService: LoadingService
   ){}
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
       this.routeComponent = params.get('hash');
+      this.title = this.routeComponent || "";
       var obj = this.registerService.getModel(this.routeComponent || "");
       this.onSetPropertiesDatatable(obj);
     });

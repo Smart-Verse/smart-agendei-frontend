@@ -18,8 +18,7 @@ import {InputTextComponent} from "../components/inputs/input-text/input-text.com
 import {LoadingComponent} from "../loading/loading.component";
 import {FloatLabelModule} from "primeng/floatlabel";
 import {DatatableComponent} from "../components/datatable/datatable.component";
-import {TabView} from "primeng/tabview";
-import {TabPanel, TabsModule} from "primeng/tabs";
+import {TabsModule} from "primeng/tabs";
 
 
 @NgModule({

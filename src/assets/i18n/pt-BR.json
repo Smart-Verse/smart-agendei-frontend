@@ -17,6 +17,8 @@
   "dashboard": "Dashboard",
   "notification": "Notificações",
   "scheduler": "Agenda",
+  "service": "Serviços",
+  "client": "Clientes",
   "personal_basic_data_title": "Dados Basicos",
   "personal_field_name": "Nome Completo",
   "personal_field_status": "Status",
