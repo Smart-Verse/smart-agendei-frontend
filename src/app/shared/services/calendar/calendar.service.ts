@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import {Appointment, CalendarEvent, ViewMode} from "../../interfaces/appointment.interface";
+import {CrudService} from "../crud/crud.service";
+import {RequestData} from "../../components/request-data";
 
 @Injectable({ providedIn: 'root' })
 export class CalendarService {
@@ -12,9 +14,9 @@ export class CalendarService {
   viewMode$ = this.viewModeSubject.asObservable();
   appointments$ = this.appointmentsSubject.asObservable();
 
-  constructor() {
-    this.loadSampleData();
-
+  constructor(
+    private readonly crudService: CrudService
+  ) {
   }
 
   setCurrentDate(date: Date): void {
@@ -25,16 +27,6 @@ export class CalendarService {
     this.viewModeSubject.next(mode);
   }
 
-  loadAppointments(appointments: Appointment[]): void {
-    const calendarEvents = appointments.map((appointment, index) => ({
-      ...appointment,
-      id: `appointment-${index}`,
-      startTime: new Date(appointment.startDate),
-      endTime: new Date(appointment.endDate),
-      duration: this.calculateDuration(appointment.startDate, appointment.endDate)
-    }));
-    this.appointmentsSubject.next(calendarEvents);
-  }
 
   getAppointmentsForDate(date: Date): CalendarEvent[] {
     const appointments = this.appointmentsSubject.value;
@@ -56,14 +48,6 @@ export class CalendarService {
     );
   }
 
-  getCurrentDate(): Date {
-    return this.currentDateSubject.value;
-  }
-
-  getCurrentViewMode(): ViewMode {
-    return this.viewModeSubject.value;
-  }
-
   private calculateDuration(startDate: string, endDate: string): number {
     const start = new Date(startDate);
     const end = new Date(endDate);
@@ -78,6 +62,40 @@ export class CalendarService {
 
   private isDateInRange(date: Date, start: Date, end: Date): boolean {
     return date >= start && date <= end;
+  }
+
+
+  // será removido
+  loadAppointments(appointments: Appointment[]): void {
+    const calendarEvents = appointments.map((appointment, index) => ({
+      ...appointment,
+      id: `appointment-${index}`,
+      startTime: new Date(appointment.startDate),
+      endTime: new Date(appointment.endDate),
+      duration: this.calculateDuration(appointment.startDate, appointment.endDate)
+    }));
+    this.appointmentsSubject.next(calendarEvents);
+  }
+
+  onConvertAppointment(obj: any): Appointment[] {
+    let appointments: Appointment[] = [];
+
+    obj.forEach((item: any) => {
+
+      const app: Appointment = {
+        startDate: item.startDate,
+        endDate: item.endDate,
+        description: item.service.name,
+        userName: item.userName.name,
+        cellColor: item.cellColor,
+        clientName: item.client.name,
+      };
+
+      appointments.push(app);
+
+    })
+
+    return appointments;
   }
 
   private loadSampleData(): void {

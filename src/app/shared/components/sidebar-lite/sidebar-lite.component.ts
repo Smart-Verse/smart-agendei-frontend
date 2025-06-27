@@ -5,9 +5,10 @@ import {MenuService} from "../../services/menu/menu.service";
 import {Tooltip} from "primeng/tooltip";
 import {UserConfigurationService} from "../../../services/user-configuration/user-configuration.service";
 import {LoadingService} from "../../services/loading/loading.service";
-import {HttpModule} from "../../../config/http/http.module";
 import {HttpClient} from "@angular/common/http";
 import {SharedCommonModule} from "../../common/shared-common.module";
+import {CookiesService} from "../../services/cookies/cookies.service";
+import {EnumCookie} from "../../services/cookies/cookie.enum";
 
 
 @Component({
@@ -41,7 +42,8 @@ export class SidebarLiteComponent implements OnInit {
     private menuService: MenuService,
     private router: Router,
     private readonly userConfigurationService: UserConfigurationService,
-    private readonly loadingService: LoadingService
+    private readonly loadingService: LoadingService,
+    private readonly cookieService: CookiesService
   ) {
     this._menuitens = this.menuService.menu
   }
@@ -83,6 +85,7 @@ export class SidebarLiteComponent implements OnInit {
     this.userConfigurationService.getUser().subscribe({
       next: (res) => {
         this.userName = res.output.name;
+        this.cookieService.setObject(EnumCookie.USER_DATA, res.output);
         this.loadingService.showLoading.next(false);
       },
       error: (err) => {

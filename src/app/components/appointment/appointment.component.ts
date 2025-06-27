@@ -9,6 +9,8 @@ import {ActivatedRoute} from "@angular/router";
 import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
 import {AppointmentConfig} from "./appointment.config";
 import {convertDate} from "../../shared/util/utils";
+import {CookiesService} from "../../shared/services/cookies/cookies.service";
+import {EnumCookie} from "../../shared/services/cookies/cookie.enum";
 
 @Component({
   selector: 'app-appointment',
@@ -26,6 +28,7 @@ export class AppointmentComponent  implements OnInit {
   public formGroup: FormGroup;
   public extras: any[] = [];
   protected configObj: AppointmentConfig = new AppointmentConfig();
+  private userData: any;
 
   _status = statusAppointment
 
@@ -36,6 +39,7 @@ export class AppointmentComponent  implements OnInit {
     private route: ActivatedRoute,
     public readonly ref: DynamicDialogRef,
     public readonly config: DynamicDialogConfig,
+    private readonly cookiesService: CookiesService
   ) {
     this.formGroup = this.fieldsService.onCreateFormBuiderDynamic(this.configObj.fields);
   }
@@ -47,11 +51,12 @@ export class AppointmentComponent  implements OnInit {
       this.config.data.endDate = convertDate(this.config.data.endDate);
       this.formGroup.patchValue(this.config.data);
     }
+    this.userData = this.cookiesService.getObject(EnumCookie.USER_DATA);
   }
 
   onSave() {
     if(this.formGroup.valid) {
-      this.ref.close(this.configObj.convertFormGroupToDTO(this.formGroup, this.extras));
+      this.ref.close(this.configObj.convertFormGroupToDTO(this.formGroup, this.extras, this.userData));
     }else {
       this.toastService.warn({summary: "Mensagem", detail: this.translateService.translate("common_message_invalid_fields")});
       this.fieldsService.verifyIsValid();

@@ -17,7 +17,8 @@
       {
         "field": "price",
         "header": "Valor",
-        "width": "10%"
+        "width": "10%",
+        "customValue": "MONEY"
       }
     ]
   },

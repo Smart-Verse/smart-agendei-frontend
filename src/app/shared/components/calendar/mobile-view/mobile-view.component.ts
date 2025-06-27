@@ -60,14 +60,14 @@ export class MobileViewComponent implements OnInit{
   }
 
   formatCurrentDate(): string {
-    return this.currentDate.toLocaleDateString('en-US', {
+    return this.currentDate.toLocaleDateString('pt-BR', {
       month: 'short',
       day: 'numeric'
     });
   }
 
   formatCurrentDay(): string {
-    return this.currentDate.toLocaleDateString('en-US', {
+    return this.currentDate.toLocaleDateString('pt-BR', {
       weekday: 'long'
     });
   }
@@ -75,9 +75,9 @@ export class MobileViewComponent implements OnInit{
   getTimelineTitle(): string {
     const today = new Date();
     if (this.isSameDay(this.currentDate, today)) {
-      return 'Today\'s Schedule';
+      return 'Programação de hoje';
     }
-    return this.currentDate.toLocaleDateString('en-US', {
+    return this.currentDate.toLocaleDateString('pt-BR', {
       weekday: 'long',
       month: 'long',
       day: 'numeric'
@@ -85,7 +85,7 @@ export class MobileViewComponent implements OnInit{
   }
 
   formatTime(date: Date): string {
-    return date.toLocaleTimeString('en-US', {
+    return date.toLocaleTimeString('pt-BR', {
       hour: 'numeric',
       minute: '2-digit',
       hour12: true

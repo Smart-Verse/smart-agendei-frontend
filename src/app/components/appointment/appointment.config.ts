@@ -1,4 +1,11 @@
 import {FormGroup} from "@angular/forms";
+import {convertDateMinute} from "../../shared/util/utils";
+
+export interface Extras {
+  id?: string
+  service: any;
+  appointment?: any;
+}
 
 export class AppointmentConfig {
   fields: any[] = [
@@ -95,20 +102,38 @@ export class AppointmentConfig {
   ];
 
 
-  convertFormGroupToDTO(formGroup: FormGroup, extras: any[]): any {
-    return {
+  convertFormGroupToDTO(formGroup: FormGroup, extras: any[], userData: any): any {
+    let obj = {
       id: formGroup.get('id')?.value,
       client: formGroup.get('client')?.value,
       service: formGroup.get('service')?.value,
       startDate: formGroup.get('startDate')?.value,
       endDate: formGroup.get('endDate')?.value,
       description: formGroup.get('description')?.value,
-      userName: formGroup.get('userName')?.value,
+      userName: userData,
       cellColor: formGroup.get('cellColor')?.value,
       discount: formGroup.get('discount')?.value,
       total: formGroup.get('total')?.value,
-      extras: extras,
+      extras: this.onConvertExtras(extras),
       status: formGroup.get('status')?.value["key"],
     }
+
+    obj.cellColor = obj.service.color;
+    if(!obj.discount) obj.discount = 0;
+    obj.userName = userData;
+
+    // corrige fuso datas
+    obj.startDate = convertDateMinute(obj.startDate);
+    obj.endDate = convertDateMinute(obj.endDate);
+
+    return obj;
+  }
+
+  onConvertExtras(extras: any): Extras[]{
+    let obj: Extras[] = [];
+    extras.forEach((extra: any) => {
+      obj.push({service: extra})
+    })
+    return obj;
   }
 }

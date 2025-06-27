@@ -4,6 +4,7 @@ export interface Appointment {
   description: string;
   userName: string;
   cellColor: string; // hex color
+  clientName?: string
 }
 
 export interface CalendarEvent extends Appointment {

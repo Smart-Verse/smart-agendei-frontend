@@ -1,7 +1,16 @@
 import dayjs from "dayjs";
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export function convertDate(date: string) {
   return dayjs(date,"'YYYY-MM-DD'").toDate();
+}
+
+export function convertDateMinute(date: any) {
+  return dayjs(date).tz('America/Sao_Paulo').format('YYYY-MM-DDTHH:mm:ss');
 }
 
 export function generateUUIDv4(): string {
