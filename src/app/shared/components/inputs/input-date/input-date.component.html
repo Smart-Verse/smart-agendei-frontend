@@ -9,8 +9,10 @@
     [autofocus]="focus"
     [disabled]="disabled"
     [touchUI]="false"
-    dateFormat="dd/mm/yy"
+    [dateFormat]="format"
     [readonlyInput]="false"
+    hourFormat="24"
+    [showTime]="showTime"
     class="w-full">
   </p-datePicker>
   <label>{{label}}</label>

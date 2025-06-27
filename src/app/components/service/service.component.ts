@@ -8,11 +8,13 @@ import {TranslateService} from "../../shared/services/translate/translate.servic
 import {ActivatedRoute} from "@angular/router";
 import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
 import {status} from "../../shared/util/constants";
+import { ColorPickerModule } from 'primeng/colorpicker';
 
 @Component({
   selector: 'app-service',
   imports: [
-    SharedCommonModule
+    SharedCommonModule,
+    ColorPickerModule
   ],
   providers: [
     ToastService
@@ -20,7 +22,7 @@ import {status} from "../../shared/util/constants";
   templateUrl: './service.component.html',
   styleUrl: './service.component.scss'
 })
-export class ServiceComponent implements OnInit{
+export class ServiceComponent implements OnInit {
 
   public formGroup: FormGroup;
   protected configObj: ServiceConfig = new ServiceConfig();

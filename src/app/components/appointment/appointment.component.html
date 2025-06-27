@@ -1,0 +1,131 @@
+<div [formGroup]="formGroup">
+  <div class="formgrid grid">
+    <app-dropdown
+      formControlName="status"
+      name="status"
+      [options]="_status"
+      optionLabel="value"
+      [field]="formGroup"
+      class="field col-12 md:col-4 c-margin"
+      [label]="translateService.translate('common_status')"
+      type="text">
+    </app-dropdown>
+    <app-input-date
+      formControlName="startDate"
+      name="startDate"
+      [field]="formGroup"
+      class="field col-12 md:col-4 c-margin"
+      [label]="translateService.translate('appointement_start_date')"
+      [showTime]="true"
+      type="text">
+    </app-input-date>
+    <app-input-date
+      formControlName="endDate"
+      name="endDate"
+      [field]="formGroup"
+      class="field col-12 md:col-4 c-margin"
+      [label]="translateService.translate('appointement_end_date')"
+      [showTime]="true"
+      type="text">
+    </app-input-date>
+    <app-auto-complete
+      formControlName="client"
+      name="client"
+      [field]="formGroup"
+      route="client"
+      optionLabel="name"
+      class="field col-12 md:col-6 c-margin"
+      [label]="translateService.translate('appointement_client')"
+      type="text">
+    </app-auto-complete>
+    <app-auto-complete
+      formControlName="service"
+      name="service"
+      [field]="formGroup"
+      route="service"
+      (onSelectChange)="onCalculateExtras()"
+      optionLabel="name"
+      class="field col-12 md:col-6 c-margin"
+      [label]="translateService.translate('appointement_service')"
+      type="text">
+    </app-auto-complete>
+    <app-input-text
+      formControlName="description"
+      name="ibge"
+      [field]="formGroup"
+      class="field col-12 md:col-12 c-margin"
+      [label]="translateService.translate('common_description')"
+      type="text">
+    </app-input-text>
+    <div class="field col-12 md:col-12 c-margin">
+      <span>Serviços extras</span>
+      <div class="formgrid grid">
+        <app-auto-complete
+          formControlName="extra"
+          name="extra"
+          [field]="formGroup"
+          route="service"
+          optionLabel="name"
+          [clearSelectOption]="true"
+          class="field col-12 md:col-12 c-margin"
+          (onSelectChange)="onAddExtras()"
+          [label]="translateService.translate('appointement_extra')"
+          type="text">
+        </app-auto-complete>
+      </div>
+      <hr>
+      @for(extra of extras; track extra.id) {
+        <div class="extra">
+          <div>
+            {{ extra.name }}
+          </div>
+          <div (click)="onRemoveExtras(extra)" class="trash">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 6h18"></path>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              <line x1="10" y1="11" x2="10" y2="17"></line>
+              <line x1="14" y1="11" x2="14" y2="17"></line>
+            </svg>
+          </div>
+        </div>
+      }
+    </div>
+    <app-input-number
+      formControlName="value"
+      name="value"
+      [field]="formGroup"
+      class="field col-12 md:col-3 c-margin"
+      [label]="translateService.translate('common_value')"
+      type="text">
+    </app-input-number>
+    <app-input-number
+      formControlName="valueExtras"
+      name="valueExtras"
+      [field]="formGroup"
+      class="field col-12 md:col-3 c-margin"
+      [label]="translateService.translate('appointement_valueExtra')"
+      type="text">
+    </app-input-number>
+    <app-input-number
+      formControlName="discount"
+      name="discount"
+      (foocusChange)="onCalculateExtras()"
+      [field]="formGroup"
+      class="field col-12 md:col-3 c-margin"
+      [label]="translateService.translate('appointement_discount')"
+      type="text">
+    </app-input-number>
+    <app-input-number
+      formControlName="total"
+      name="total"
+      [field]="formGroup"
+      class="field col-12 md:col-3 c-margin"
+      [label]="translateService.translate('appointement_total')"
+      type="text">
+    </app-input-number>
+  </div>
+</div>
+<div class="buttons">
+  <p-button  [label]="translateService.translate('common_action_save')" (onClick)="onSave()"/>
+  <p-button  [label]="translateService.translate('common_action_cancel')" (onClick)="onCancel()"/>
+</div>

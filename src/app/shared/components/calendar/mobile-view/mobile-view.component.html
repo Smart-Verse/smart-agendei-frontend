@@ -22,19 +22,27 @@
         </button>
       </div>
 
-      <button class="today-btn" (click)="goToToday()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-          <line x1="16" y1="2" x2="16" y2="6"></line>
-          <line x1="8" y1="2" x2="8" y2="6"></line>
-          <line x1="3" y1="10" x2="21" y2="10"></line>
-        </svg>
-        Today
-      </button>
+      <div style="display: flex; gap: 5px">
+        <button class="today-btn" (click)="goToToday()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          Hoje
+        </button>
+        <button class="today-btn" (click)="eventScheduler(null)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Adicionar
+        </button>
+      </div>
     </div>
   </div>
 
-  <!-- Quick Stats -->
   <div class="quick-stats">
     <div class="stat-card">
       <div class="stat-icon">
@@ -63,7 +71,6 @@
     </div>
   </div>
 
-  <!-- Timeline View -->
   <div class="timeline-container">
     <div class="timeline-header">
       <h3>{{ getTimelineTitle() }}</h3>
@@ -74,6 +81,7 @@
       <div
         *ngFor="let appointment of currentAppointments; let i = index"
         class="appointment-card"
+        (click)="eventScheduler(appointment)"
         [style.animation-delay.ms]="i * 100"
       >
         <div class="appointment-time-indicator">

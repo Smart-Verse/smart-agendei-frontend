@@ -1,29 +1,63 @@
 :host::ng-deep {
-    .p-button{
-        background: var(--active-indicator-color);
-        color: black;
-        padding: 0.55rem 1rem;
-    }
-    .p-button.p-button-icon-only {
-        width: 2rem;
-        padding: 0.45rem;
-    }
-    .p-datatable .p-datatable-tbody > tr > td {
-        text-align: left;
-        border: none;
-        border-width: 0 0 1px 0;
-        font-size: 12px;
-        padding: 0.35rem 0.90rem;
-    }
-    .p-datatable .p-datatable-thead > tr > th {
-      font-size: 12px;
-    }
-    .p-treetable .p-treetable-tbody > tr > td {
-      text-align: left;
-      border: none;
-      border-width: 0 0 1px 0;
-      font-size: 12px;
-      padding: 0.35rem 0.90rem;
-    }
+  .p-button.p-button-icon-only {
+    width: 2rem;
+    padding: 0.45rem;
+  }
+  .p-inputtext{
+    background-color: rgba($color: #e9e6e6, $alpha: 0.1);
+    padding: 4px;
+  }
+  .p-dialog-mask  {
+    z-index: 99999;
+  }
+  .p-dropdown{
+    width: 100%;
+  }
+  .p-select-label{
+    padding: 4px;
+  }
+  .p-inputnumber-input{
+    width: 100% !important;
+  }
+
+  p-inputnumber, .p-inputnumber {
+    width: 100% !important;
+  }
+
+  .p-datatable .p-datatable-tbody > tr > td {
+    text-align: left;
+    border: none;
+    border-width: 0 0 1px 0;
+    font-size: 12px;
+    padding: 0.05rem 0.20rem;
+  }
+  .p-datatable .p-datatable-thead > tr > th {
+    font-size: 12px;
+    padding: 0.20rem 0.20rem;
+  }
+  .p-treetable .p-treetable-tbody > tr > td {
+    text-align: left;
+    border: none;
+    border-width: 0 0 1px 0;
+    font-size: 12px;
+    padding: 0.05rem 0.20rem;
+  }
+
+  .p-paginator .p-paginator-pages .p-paginator-page {
+    font-size: 12px;
+    min-width: 2.0rem;
+    height: 2.0rem;
+  }
+
+  .p-paginator .p-paginator-first, .p-paginator .p-paginator-prev, .p-paginator .p-paginator-next, .p-paginator .p-paginator-last{
+    font-size: 12px;
+    min-width: 2.0rem;
+    height: 2.0rem;
+  }
+  .p-paginator .p-dropdown{
+    font-size: 12px;
+    min-width: 2.0rem;
+    height: 2.0rem;
+  }
 
 }

@@ -12,15 +12,11 @@
   "common_message_header_confirmation_delete": "Exclusão de registro",
   "common_description": "Descrição",
   "common_name": "Nome",
-  "common_type": "Tipo",
-  "common_code": "Código",
-
+  "common_status": "Status",
+  "common_value": "Valor",
   "dashboard": "Dashboard",
-
   "notification": "Notificações",
-
   "scheduler": "Agenda",
-
   "personal_basic_data_title": "Dados Basicos",
   "personal_field_name": "Nome Completo",
   "personal_field_status": "Status",
@@ -42,12 +38,20 @@
   "personal_field_maritalStatus": "Estado civil",
   "personal_field_nationality": "Nacionalidade",
   "personal_field_birthplace": "Naturalidade",
-
   "user_configuration": "Configurações do usuário",
   "user_configuration_name": "Nome",
   "user_configuration_email": "Email",
   "user_configuration_phone": "Telefone",
   "user_configuration_theme": "Tema",
-  "user_configuration_language": "Idioma"
+  "user_configuration_language": "Idioma",
+  "service_execution_time": "Tempo de execução",
+  "appointement_start_date": "Data inicio",
+  "appointement_end_date": "Data fim",
+  "appointement_service": "Serviço",
+  "appointement_discount": "Desconto",
+  "appointement_total": "Total",
+  "appointement_extra": "Serviço extra",
+  "appointement_valueExtra": "Valor dos extras",
+  "appointement_client": "Cliente"
 
 }

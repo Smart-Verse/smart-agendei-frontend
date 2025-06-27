@@ -7,9 +7,7 @@ import {ToastService} from "../../../services/toast/toast.service";
 import {FieldsService} from "../../../services/fields/fields.service";
 import {File} from "node:buffer";
 import {AppControlValueAccessor} from "../../app-control-value";
-import {base64ToArrayBuffer, generateUUIDv4} from "../../../util/constants";
-import {LoadingComponent} from "../../../loading/loading.component";
-
+import {base64ToArrayBuffer, generateUUIDv4} from "../../../util/utils";
 
 
 @Component({

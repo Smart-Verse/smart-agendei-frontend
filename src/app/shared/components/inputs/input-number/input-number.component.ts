@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FloatLabelModule} from "primeng/floatlabel";
 import {FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
@@ -33,4 +33,10 @@ import {AppControlValueAccessor} from "../../app-control-value";
 export class InputNumberComponent extends AppControlValueAccessor{
 
   @Input() minDecimal: Number = 2;
+  @Output() foocusChange: EventEmitter<void> = new EventEmitter();
+
+
+  onFocusChange(){
+    this.foocusChange.emit();
+  }
 }

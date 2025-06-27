@@ -2,6 +2,7 @@
   <p-inputNumber
     (ngModelChange)="onChange($event)"
     [ngModel]="value"
+    (onBlur)="onFocusChange()"
     [ngClass]="{'ng-invalid ng-dirty': !isValid}"
     class="p-inputnumber"
     [pTooltip]="guidance"

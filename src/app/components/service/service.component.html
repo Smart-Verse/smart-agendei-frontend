@@ -23,7 +23,7 @@
       name="price"
       [field]="formGroup"
       class="field col-12 md:col-6 c-margin"
-      [label]="translateService.translate('common_price')"
+      [label]="translateService.translate('common_value')"
       type="text">
     </app-input-number>
     <app-input-number
@@ -31,10 +31,14 @@
       name="executionTime"
       [minDecimal]="0"
       [field]="formGroup"
-      class="field col-12 md:col-6 c-margin"
-      [label]="translateService.translate('common_executionTime')"
+      class="field col-12 md:col-5 c-margin"
+      [label]="translateService.translate('service_execution_time')"
       type="text">
     </app-input-number>
+    <div class="field col-12 md:col-1 c-margin">
+      <p-colorPicker appendTo="body" formControlName="color" >
+      </p-colorPicker>
+    </div>
     <app-input-text
       formControlName="description"
       fieldType="input-text-area"

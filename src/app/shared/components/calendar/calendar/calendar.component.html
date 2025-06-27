@@ -1,7 +1,11 @@
 <div class="calendar-container">
   @if(isMobileView) {
     <div class="mobile-container">
-      <app-mobile-view [currentDate]="currentDate" [appointments]="appointments"></app-mobile-view>
+      <app-mobile-view
+        (eventClick)="onEventScheduler($event)"
+        [currentDate]="currentDate"
+        [appointments]="appointments">
+      </app-mobile-view>
     </div>
   } @else {
     <div class="desktop-view">

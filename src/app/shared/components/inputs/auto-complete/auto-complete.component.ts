@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, Output} from '@angular/core';
 import {CommonModule} from "@angular/common";
 
 import {FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule} from "@angular/forms";
@@ -38,6 +38,7 @@ export class AutoCompleteComponent extends AppControlValueAccessor{
   @Input() optionLabel: string = "";
   @Input() route: string = "";
   @Input() defaultFilter: string = "";
+  @Input() clearSelectOption: boolean = false;
 
   @Output() onSelectChange: EventEmitter<void> = new EventEmitter();
 
@@ -45,7 +46,8 @@ export class AutoCompleteComponent extends AppControlValueAccessor{
 
   constructor(
     private readonly fieldServiceInputText: FieldsService,
-    private readonly crudService: CrudService
+    private readonly crudService: CrudService,
+    private cdr: ChangeDetectorRef
   ){
     super(fieldServiceInputText)
   }
@@ -75,6 +77,10 @@ export class AutoCompleteComponent extends AppControlValueAccessor{
   }
 
   onSelected(){
+    if(this.clearSelectOption){
+      this.value = null;
+      this.cdr.detectChanges();
+    }
     this.onSelectChange.emit();
   }
 }

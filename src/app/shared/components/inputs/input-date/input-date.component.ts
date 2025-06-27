@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 
@@ -38,6 +38,9 @@ import {DatePicker} from "primeng/datepicker";
 })
 export class InputDateComponent extends AppControlValueAccessor {
 
+  @Input() format: string = "dd/mm/yy";
+  @Input() showTime: boolean = false;
+
   ptBr: any = {
     firstDayOfWeek: 0,
     dayNames: ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"],
@@ -48,6 +51,8 @@ export class InputDateComponent extends AppControlValueAccessor {
     today: "Hoje",
     clear: "Limpar",
   };
+
+
 
   constructor(
     private readonly fieldServiceInputText: FieldsService,

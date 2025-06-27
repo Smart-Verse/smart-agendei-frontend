@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, Type} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {DayViewComponent} from "../day-view/day-view.component";
 import {WeekViewComponent} from "../week-view/week-view.component";
@@ -7,16 +7,27 @@ import {MobileViewComponent} from "../mobile-view/mobile-view.component";
 import {combineLatest, Subject, takeUntil} from "rxjs";
 import {CalendarEvent, ViewMode} from "../../../interfaces/appointment.interface";
 import {CalendarService} from "../../../services/calendar/calendar.service";
+import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 
 @Component({
   selector: 'app-calendar',
-  imports: [CommonModule, DayViewComponent, WeekViewComponent, MonthViewComponent, MobileViewComponent],
+  imports: [
+    CommonModule,
+    DayViewComponent,
+    WeekViewComponent,
+    MonthViewComponent,
+    MobileViewComponent
+  ],
+  providers: [
+    DialogService,
+  ],
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.scss'
 })
 export class CalendarComponent implements OnInit, OnDestroy  {
 
   @Input() isMobileView: boolean = false;
+  @Input() component?: Type<any>;
 
   private destroy$ = new Subject<void>();
 
@@ -24,11 +35,16 @@ export class CalendarComponent implements OnInit, OnDestroy  {
   currentViewMode: ViewMode = 'month';
   currentAppointments: CalendarEvent[] = [];
   appointments: CalendarEvent[] = [];
-
-
   viewModes: ViewMode[] = ['day', 'week', 'month'];
 
-  constructor(private calendarService: CalendarService) {}
+  ref: DynamicDialogRef | undefined;
+  originalClose: any;
+
+
+  constructor(
+    private calendarService: CalendarService,
+    private readonly dialogService: DialogService,
+  ) {}
 
   ngOnInit() {
     combineLatest([
@@ -71,10 +87,6 @@ export class CalendarComponent implements OnInit, OnDestroy  {
 
   setViewMode(mode: ViewMode) {
     this.calendarService.setViewMode(mode);
-  }
-
-  toggleMobileView() {
-    this.isMobileView = !this.isMobileView;
   }
 
   goToPrevious() {
@@ -146,5 +158,43 @@ export class CalendarComponent implements OnInit, OnDestroy  {
     const day = start.getDay();
     start.setDate(start.getDate() - day);
     return start;
+  }
+
+  async onOpenModal(obj: any){
+    if(this.component){
+      this.ref = this.dialogService.open(this.component,
+      {
+        header: "Agendamento",
+        width: '80vw',
+        modal:true,
+        closable: true,
+        draggable: true,
+        maximizable: false,
+        data: obj,
+        baseZIndex: 999998,
+      });
+
+      this.originalClose = this.ref.close.bind(this.ref);
+      this.ref.close = (result: any) => {
+        if (result) {
+          if(!result.id){
+            //this.onSave(result);
+          } else {
+            //this.onUpdate(result);
+          }
+        } else {
+          this.originalClose(null);
+        }
+      };
+
+    }
+
+
+
+
+  }
+
+  onEventScheduler(obj: any){
+    this.onOpenModal(obj);
   }
 }

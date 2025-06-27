@@ -13,8 +13,8 @@ export class CalendarService {
   appointments$ = this.appointmentsSubject.asObservable();
 
   constructor() {
-    // Sample data for demonstration
     this.loadSampleData();
+
   }
 
   setCurrentDate(date: Date): void {

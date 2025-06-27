@@ -1,0 +1,15 @@
+@use "../../shared/styles/button.scss" as *;
+.extra{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px;
+  .trash{
+    color: red;
+    cursor: pointer;
+  }
+}

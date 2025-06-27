@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CalendarEvent} from "../../../interfaces/appointment.interface";
 import {CalendarService} from "../../../services/calendar/calendar.service";
 import {CommonModule} from "@angular/common";
@@ -12,6 +12,7 @@ import {CommonModule} from "@angular/common";
 export class MobileViewComponent implements OnInit{
   @Input() currentDate!: Date;
   @Input() appointments: CalendarEvent[] = [];
+  @Output() eventClick = new EventEmitter<any>();
 
   currentAppointments: CalendarEvent[] = [];
   todayAppointments: CalendarEvent[] = [];
@@ -134,5 +135,9 @@ export class MobileViewComponent implements OnInit{
     return date1.getFullYear() === date2.getFullYear() &&
       date1.getMonth() === date2.getMonth() &&
       date1.getDate() === date2.getDate();
+  }
+
+  eventScheduler(obj: any) {
+    this.eventClick.emit(obj);
   }
 }
