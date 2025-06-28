@@ -17,10 +17,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/agendei",
+            "outputPath": "dist/smart-agendei",
             "index": "src/index.html",
-            "deployUrl": "/agendei/",
-            "baseHref": "/agendei/",
+            "deployUrl": "/smart-agendei/",
+            "baseHref": "/smart-agendei/",
             "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
