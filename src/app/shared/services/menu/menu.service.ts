@@ -16,7 +16,7 @@ export class MenuService {
   loadMenu(): Observable<void> {
     let urlProduction = "";
     if(environment.production){
-      urlProduction = "/agendei"
+      urlProduction = environment.hbase
     }
     return this.http.get<{ [key: string]: string }>(`${urlProduction}/assets/configuration/menu.json`).pipe(
       map((data: any) => {
