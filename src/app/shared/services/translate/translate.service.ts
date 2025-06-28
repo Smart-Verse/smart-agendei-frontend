@@ -29,7 +29,7 @@ export class TranslateService {
     }
     let urlProduction = "";
     if(environment.production){
-      urlProduction = "/church-lite"
+      urlProduction = environment.hbase
     }
     return this.http.get<{ [key: string]: string }>(`${urlProduction}/assets/i18n/${this.language}.json`).pipe(
       map((data) => {
@@ -42,7 +42,7 @@ export class TranslateService {
 
     let urlProduction = "";
     if(environment.production){
-      urlProduction = "/church-lite"
+      urlProduction = environment.hbase
     }
     this.http.get<{ [key: string]: string }>(`${urlProduction}/assets/i18n/${languages[lang]}.json`).subscribe({
       next: (data) => {
