@@ -2,8 +2,9 @@
   @if(isMobileView) {
     <div class="mobile-container">
       <app-mobile-view
-        (eventClick)="onEventScheduler($event)"
+        (eventClick)="onSelectedData($event, 1)"
         [currentDate]="currentDate"
+        (eventDelete)="onDeleteData($event)"
         [appointments]="appointments">
       </app-mobile-view>
     </div>
@@ -68,3 +69,4 @@
     </div>
   }
 </div>
+<p-confirmDialog />

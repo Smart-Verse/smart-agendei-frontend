@@ -69,7 +69,6 @@ export class CalendarService {
   loadAppointments(appointments: Appointment[]): void {
     const calendarEvents = appointments.map((appointment, index) => ({
       ...appointment,
-      id: `appointment-${index}`,
       startTime: new Date(appointment.startDate),
       endTime: new Date(appointment.endDate),
       duration: this.calculateDuration(appointment.startDate, appointment.endDate)
@@ -83,9 +82,10 @@ export class CalendarService {
     obj.forEach((item: any) => {
 
       const app: Appointment = {
+        id: item.id,
         startDate: item.startDate,
         endDate: item.endDate,
-        description: item.service.name,
+        description: item.description,
         userName: item.userName.name,
         cellColor: item.cellColor,
         clientName: item.client.name,
@@ -97,44 +97,5 @@ export class CalendarService {
     })
 
     return appointments;
-  }
-
-  private loadSampleData(): void {
-    const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-
-    const sampleAppointments: Appointment[] = [
-      {
-        startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 10, 0).toISOString(),
-        endDate: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 12, 0).toISOString(),
-        description: 'Team Meeting',
-        userName: 'John Doe',
-        cellColor: '#3B82F6'
-      },
-      {
-        startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 11, 0).toISOString(),
-        endDate: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 13, 0).toISOString(),
-        description: 'Client Call',
-        userName: 'Jane Smith',
-        cellColor: '#10B981'
-      },
-      {
-        startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 14, 0).toISOString(),
-        endDate: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 15, 30).toISOString(),
-        description: 'Project Review',
-        userName: 'Mike Johnson',
-        cellColor: '#F59E0B'
-      },
-      {
-        startDate: new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), 9, 0).toISOString(),
-        endDate: new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), 12, 30).toISOString(),
-        description: 'Daily Standup',
-        userName: 'Sarah Wilson',
-        cellColor: '#EF4444'
-      }
-    ];
-
-    this.loadAppointments(sampleAppointments);
   }
 }

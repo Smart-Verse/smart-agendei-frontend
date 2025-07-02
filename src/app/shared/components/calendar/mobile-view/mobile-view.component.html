@@ -94,6 +94,7 @@
             <div class="appointment-duration">{{ getDurationText(appointment) }}</div>
           </div>
 
+
           <div class="appointment-details">
             <div class="appointment-user">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -112,9 +113,15 @@
             </div>
           </div>
 
-          <div class="appointment-status" [class]="getAppointmentStatus(appointment)">
-            {{ getAppointmentStatusText(appointment) }}
+          <div class="appointment-header">
+            <div class="appointment-status" [class]="getAppointmentStatus(appointment)">
+              {{ getAppointmentStatusText(appointment) }}
+            </div>
+            <div (click)="onDelete(appointment)">
+              <i class="pi pi-trash" style="color: red">
+              </i></div>
           </div>
+
         </div>
       </div>
     </div>

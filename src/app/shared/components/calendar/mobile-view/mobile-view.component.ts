@@ -14,6 +14,7 @@ export class MobileViewComponent implements OnInit{
   @Input() currentDate!: Date;
   @Input() appointments: CalendarEvent[] = [];
   @Output() eventClick = new EventEmitter<any>();
+  @Output() eventDelete = new EventEmitter<any>();
 
   currentAppointments: CalendarEvent[] = [];
   todayAppointments: CalendarEvent[] = [];
@@ -88,7 +89,7 @@ export class MobileViewComponent implements OnInit{
     return date.toLocaleTimeString('pt-BR', {
       hour: 'numeric',
       minute: '2-digit',
-      hour12: true
+      hour12: false
     });
   }
 
@@ -144,5 +145,11 @@ export class MobileViewComponent implements OnInit{
 
   eventScheduler(obj: any) {
     this.eventClick.emit(obj);
+  }
+
+  onDelete(appointment: CalendarEvent) {
+    if(event)
+      event.stopPropagation();
+    this.eventDelete.emit(appointment)
   }
 }

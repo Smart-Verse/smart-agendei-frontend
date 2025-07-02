@@ -1,6 +1,7 @@
 import {EStatusAppointment} from "../util/enums";
 
 export interface Appointment {
+  id: string;
   startDate: string; // ISO date string
   endDate: string;   // ISO date string
   description: string;
@@ -11,7 +12,7 @@ export interface Appointment {
 }
 
 export interface CalendarEvent extends Appointment {
-  id: string;
+
   startTime: Date;
   endTime: Date;
   duration: number; // in minutes

@@ -14,6 +14,9 @@ import {LoadingService} from "../../../services/loading/loading.service";
 import {ToastService} from "../../../services/toast/toast.service";
 import {TranslateService} from "../../../services/translate/translate.service";
 import {CookiesService} from "../../../services/cookies/cookies.service";
+import {Action} from "../../datatable/datatable.component";
+import {ConfirmationService} from "primeng/api";
+import {ConfirmDialog} from "primeng/confirmdialog";
 
 @Component({
   selector: 'app-calendar',
@@ -22,12 +25,14 @@ import {CookiesService} from "../../../services/cookies/cookies.service";
     DayViewComponent,
     WeekViewComponent,
     MonthViewComponent,
-    MobileViewComponent
+    MobileViewComponent,
+    ConfirmDialog
   ],
   providers: [
     DialogService,
     CrudService,
-    ToastService
+    ToastService,
+    ConfirmationService
   ],
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.scss'
@@ -58,7 +63,8 @@ export class CalendarComponent implements OnInit, OnDestroy  {
     private readonly crudService: CrudService,
     private readonly loadingService: LoadingService,
     private readonly toastService: ToastService,
-    private readonly translateService: TranslateService
+    private confirmationService: ConfirmationService,
+    private readonly translateService: TranslateService,
   ) {}
 
   ngOnInit() {
@@ -259,16 +265,16 @@ export class CalendarComponent implements OnInit, OnDestroy  {
     });
   }
 
-  onSelectedData(obj: any): void {
-    if(obj.data){
-      if(obj.action === 0){// delete data
-        this.onDelete(obj.data.id);
+  onSelectedData(obj: any, action: any): void {
+    if(obj){
+      if(action === 0){// delete data
+        this.onDelete(obj.id);
       } else {
-        if( obj.action === 2){
+        if( action === 2){
           this.onOpenModal(obj);
         } else {
           // quando edita, tenho que mandar a porra do parent tbm
-          this.onLoadData(obj.data.id, obj);
+          this.onLoadData(obj.id, obj);
         }
       }
     } else{
@@ -318,9 +324,28 @@ export class CalendarComponent implements OnInit, OnDestroy  {
     }
   }
 
-  onEventScheduler(obj: any){
-    this.onOpenModal(obj);
+  onDeleteData(item: any){
+    this.confirmationService.confirm({
+      message: this.translateService.translate("common_message_confirmation_delete"),
+      header: this.translateService.translate("common_message_header_confirmation_delete"),
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass:"p-button-danger p-button-text",
+      rejectButtonStyleClass:"p-button-text p-button-text",
+      acceptLabel: this.translateService.translate("common_action_yes"),
+      rejectLabel: this.translateService.translate("common_action_no"),
+      acceptIcon:"none",
+      rejectIcon:"none",
+      accept: () => {
+        if (Array.isArray(item)) {
+          item.forEach(e => {
+            this.onSelectedData(e,0)
+          });
+        } else {
+          this.onSelectedData(item,0)
+        }
+      },
+      reject: () => {}
+    });
   }
-
 
 }
