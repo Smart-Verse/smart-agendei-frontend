@@ -145,7 +145,14 @@ export class DatatableComponent {
       acceptIcon:"none",
       rejectIcon:"none",
       accept: () => {
-        this.onRegisterData(item,action)
+        if (Array.isArray(item)) {
+          item.forEach(e => {
+            this.onRegisterData(e,action)
+          });
+        } else {
+          this.onRegisterData(item,action)
+        }
+
       },
       reject: () => {}
     });
