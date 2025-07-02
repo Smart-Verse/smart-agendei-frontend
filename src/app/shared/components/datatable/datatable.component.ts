@@ -152,7 +152,6 @@ export class DatatableComponent {
         } else {
           this.onRegisterData(item,action)
         }
-
       },
       reject: () => {}
     });
