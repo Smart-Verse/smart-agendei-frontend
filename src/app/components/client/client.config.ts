@@ -1,4 +1,6 @@
 import {FormGroup} from "@angular/forms";
+import {status} from "../../shared/util/constants";
+import {gerarCorHexAleatoria} from "../../shared/util/utils";
 
 export class ClientConfig {
 
@@ -12,7 +14,7 @@ export class ClientConfig {
     },
     {
       "fieldName": "name",
-      "required": false,
+      "required": true,
       "hidden": false,
       "type": "string",
       "fields": []
@@ -33,7 +35,7 @@ export class ClientConfig {
     },
     {
       "fieldName": "phone",
-      "required": false,
+      "required": true,
       "hidden": false,
       "type": "string",
       "fields": []
@@ -64,5 +66,9 @@ export class ClientConfig {
       email: formGroup.get('email')?.value,
       status: formGroup.get('status')?.value["key"],
     }
+  }
+
+  defaultValues(formGroup: FormGroup) {
+    formGroup.get('status')?.setValue(status[0]);
   }
 }
