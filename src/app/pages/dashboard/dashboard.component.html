@@ -6,7 +6,7 @@
         <p class="dashboard-subtitle">{{ getCurrentDateText() }}</p>
       </div>
       <div class="header-actions">
-        <button class="action-btn primary">
+        <button (click)="onActionMenu('scheduler')" class="action-btn primary">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -165,7 +165,7 @@
           </div>
           <div class="client-info">
             <div class="client-name">{{ client.name }}</div>
-            <div class="client-details">{{ client.appointments }} appointments</div>
+            <div class="client-details">{{ client.appointments }} agendamentos</div>
           </div>
           <div class="client-actions">
             <button class="client-action-btn">

@@ -9,13 +9,12 @@ export interface Appointment {
   cellColor: string; // hex color
   clientName?: string;
   status?: EStatusAppointment;
+  duration: number; // in minutes
 }
 
 export interface CalendarEvent extends Appointment {
-
   startTime: Date;
   endTime: Date;
-  duration: number; // in minutes
 }
 
 export interface TimeSlot {

@@ -64,14 +64,11 @@ export class CalendarService {
     return date >= start && date <= end;
   }
 
-
-  // será removido
   loadAppointments(appointments: Appointment[]): void {
     const calendarEvents = appointments.map((appointment, index) => ({
       ...appointment,
       startTime: new Date(appointment.startDate),
-      endTime: new Date(appointment.endDate),
-      duration: this.calculateDuration(appointment.startDate, appointment.endDate)
+      endTime: new Date(appointment.endDate)
     }));
     this.appointmentsSubject.next(calendarEvents);
   }
@@ -90,6 +87,7 @@ export class CalendarService {
         cellColor: item.cellColor,
         clientName: item.client.name,
         status: item.status,
+        duration: this.calculateDuration(item.startDate, item.endDate)
       };
 
       appointments.push(app);
