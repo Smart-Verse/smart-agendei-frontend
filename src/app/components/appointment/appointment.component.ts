@@ -51,6 +51,9 @@ export class AppointmentComponent  implements OnInit {
       this.config.data.endDate = convertDate(this.config.data.endDate);
       this.formGroup.patchValue(this.config.data);
     }
+    else {
+      this.configObj.defaultValues(this.formGroup);
+    }
     this.userData = this.cookiesService.getObject(EnumCookie.USER_DATA);
   }
 
@@ -106,5 +109,19 @@ export class AppointmentComponent  implements OnInit {
     this.formGroup.get('valueExtras')?.setValue(valueExtras);
 
     this.formGroup.get('total')?.setValue((valueService + valueExtras - valueDiscont));
+    this.onSetDescription();
+  }
+
+  onSetDescription() {
+    let client = {name: '?'};
+    let service = {name: '?'};
+    if(this.formGroup.get('client')){
+      client = this.formGroup.get('client')?.value;
+    }
+
+    if(this.formGroup.get('service')?.value){
+      service = this.formGroup.get('service')?.value;
+    }
+    this.formGroup.get('description')?.setValue(`Cliente: ${client.name} solicitou serviço: ${service.name}`);
   }
 }

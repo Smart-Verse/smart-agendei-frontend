@@ -1,5 +1,6 @@
 import {FormGroup} from "@angular/forms";
 import {convertDateMinute} from "../../shared/util/utils";
+import {status, statusAppointment} from "../../shared/util/constants";
 
 export interface Extras {
   id?: string
@@ -135,5 +136,12 @@ export class AppointmentConfig {
       obj.push({service: extra})
     })
     return obj;
+  }
+
+  defaultValues(formGroup: FormGroup) {
+    formGroup.get('status')?.setValue(statusAppointment[0]);
+    formGroup.get('startDate')?.setValue(new Date());
+    formGroup.get('endDate')?.setValue(new Date(new Date().getTime() + 60 * 60 * 1000));
+
   }
 }

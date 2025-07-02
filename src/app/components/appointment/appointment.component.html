@@ -33,6 +33,7 @@
       name="client"
       [field]="formGroup"
       route="client"
+      (onSelectChange)="onSetDescription()"
       optionLabel="name"
       class="field col-12 md:col-6 c-margin"
       [label]="translateService.translate('appointement_client')"
