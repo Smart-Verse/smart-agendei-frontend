@@ -1,4 +1,6 @@
 import {FormGroup} from "@angular/forms";
+import {gerarCorHexAleatoria} from "../../shared/util/utils";
+import {status} from "../../shared/util/constants";
 
 export class ServiceConfig {
 
@@ -17,13 +19,13 @@ export class ServiceConfig {
     },
     {
       "fieldName": "description",
-      "required": false,
+      "required": true,
       "hidden": false,
       "type": "string"
     },
     {
       "fieldName": "executionTime",
-      "required": false,
+      "required": true,
       "hidden": false,
       "type": "string"
     },
@@ -41,7 +43,7 @@ export class ServiceConfig {
     },
     {
       "fieldName": "color",
-      "required": false,
+      "required": true,
       "hidden": false,
       "type": "string"
     }
@@ -57,5 +59,12 @@ export class ServiceConfig {
       color: formGroup.get('color')?.value,
       status: formGroup.get('status')?.value["key"],
     }
+  }
+
+  defaultValues(formGroup: FormGroup) {
+    formGroup.get('status')?.setValue(status[0]);
+    formGroup.get('executionTime')?.setValue(30);
+    formGroup.get('color')?.setValue(gerarCorHexAleatoria());
+    formGroup.get('price')?.setValue(0);
   }
 }

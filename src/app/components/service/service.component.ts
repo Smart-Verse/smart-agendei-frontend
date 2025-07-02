@@ -38,6 +38,7 @@ export class ServiceComponent implements OnInit {
     public readonly config: DynamicDialogConfig,
   ) {
     this.formGroup = this.fieldsService.onCreateFormBuiderDynamic(this.configObj.fields);
+    this.configObj.defaultValues(this.formGroup);
   }
 
   ngOnInit(): void {
